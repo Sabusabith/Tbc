@@ -21,10 +21,10 @@ class GetPhcDetailsController extends GetxController {
     getPhcDetails(authid);
   }
 
-  getPhcDetails(phc_auth_id) async {
+  getPhcDetails(userid) async {
    try{ 
     isLoading(true);
-    var url = AppConstants.baseUrl + '/api/getPhcDetails/$phc_auth_id';
+    var url = AppConstants.baseUrl + '/api/getPhcDetails/$userid';
     Response response = await ApiProvider().get(url);
     print('phc details response ============> $response');
     if (response.statusCode == 200 &&  response.data["SuccessResponse"]['statusCode']==true) {

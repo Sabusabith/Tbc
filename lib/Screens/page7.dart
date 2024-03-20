@@ -1,7 +1,10 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:qhance_uiii/Screens/page2.dart';
+import 'package:qhance_uiii/controllers/api/get_user_controller.dart';
 import 'package:qhance_uiii/controllers/api/login_controller.dart';
 import 'package:qhance_uiii/main.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,9 +16,9 @@ import '../controllers/api/get_zone_controller.dart';
 import '../helper/colors.dart';
 
 class page7 extends StatelessWidget {
- page7({super.key});
-GetZoneController controller = Get.put(GetZoneController());
-
+  page7({super.key});
+  GetZoneController controller = Get.put(GetZoneController());
+  GetUserssController userController = Get.put(GetUserssController());
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -40,13 +43,13 @@ GetZoneController controller = Get.put(GetZoneController());
           ),
           actions: [
             IconButton(
-              onPressed: ()async{
-                     var authid = await Get.find<LoginController>().authid;
-                  controller.getZones(authid);
-                Navigator.push(context, MaterialPageRoute(builder: (context)=> page2()));
+              onPressed: () async {
+                var authid = await Get.find<LoginController>().authid;
+                controller.getZones(authid);
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => page2()));
               },
-              icon:
-              const Icon(
+              icon: const Icon(
                 Icons.logout,
                 color: Colors.white,
               ),
@@ -69,7 +72,9 @@ GetZoneController controller = Get.put(GetZoneController());
                     text3: "care code",
                     borderRadius: ScreenUtil().setWidth(13),
                     Bordercolor: Colors.black,
-                    text: "Health Zone Name",
+                    text: userController
+                        .usersModel!.successResponse.data[0].zone!.zoneName
+                        .toString(),
                     text1: "Primary Health Care Name",
                     textColor: Colors.black,
                     text1Color: Colors.grey,
@@ -98,480 +103,107 @@ GetZoneController controller = Get.put(GetZoneController());
               SizedBox(
                 height: ScreenUtil().setHeight(25),
               ),
-              Card(
-                color: Colors.white,
-                elevation: 2, // Adjust the elevation as needed
-                shadowColor: Colors.grey, // Set the shadow color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(9.0),
-                ),
-                child: Container(
-                  width: ScreenUtil().setWidth(333),
-                  height: ScreenUtil().setHeight(95),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.white,
-                      )),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: ScreenUtil().setWidth(14),
-                      ),
-                      const CircleAvatar(
-                        backgroundImage: AssetImage("assets/face4.jpg"),
-                        radius: 30,
-                      ),
-                      SizedBox(
-                        width: ScreenUtil().setWidth(19),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: ScreenUtil().setHeight(15),
-                          ),
-
-                          const Text(
-                            "Person name",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 17,
-                                color: Colors.black),
-                          ),
-
-                          SizedBox(
-                            height: ScreenUtil().setHeight(5),
-                          ),
-                          const Text("Speciality                ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: Colors.black87),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(6),
-                          ),
-                          const Text("+91 9895957143 ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: Colors.black87),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: ScreenUtil().setWidth(90),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: ScreenUtil().setHeight(16),
-                          ),
-                          const Text("Role",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: Colors.black87),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(5),
-                          ),
-
-                        ],
-                      ),
-
-
-
-
-                    ],
-                  ),
-                
-                ),
-              ),
-              SizedBox(
-                height: ScreenUtil().setHeight(25),
-              ),
-              Card(
-                color: Colors.white,
-                elevation: 2, // Adjust the elevation as needed
-                shadowColor: Colors.grey, // Set the shadow color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Container(
-                  width: ScreenUtil().setWidth(333),
-                  height: ScreenUtil().setHeight(95),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.white,
-                      )),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: ScreenUtil().setWidth(14),
-                      ),
-                      const CircleAvatar(
-                        backgroundImage: AssetImage("assets/face2.jpg"),
-                        radius: 30,
-                      ),
-                      SizedBox(
-                        width: ScreenUtil().setWidth(19),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: ScreenUtil().setHeight(15),
-                          ),
-
-                          const Text(
-                            "Person name",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 17,
-                                color: Colors.black),
-                          ),
-
-                          SizedBox(
-                            height: ScreenUtil().setHeight(5),
-                          ),
-                          const Text("Speciality                ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: Colors.black87),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(6),
-                          ),
-                          const Text("+91 9895957143 ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: Colors.black87),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: ScreenUtil().setWidth(90),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: ScreenUtil().setHeight(16),
-                          ),
-                          const Text("Role",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: Colors.black87),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(5),
-                          ),
-
-                        ],
-                      ),
-
-
-
-
-                    ],
-                  ),
-
-                ),
-              ),
-              SizedBox(
-                height: ScreenUtil().setHeight(25),
-              ),
-              Card(
-                color: Colors.white,
-                elevation: 2, // Adjust the elevation as needed
-                shadowColor: Colors.grey, // Set the shadow color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Container(
-                  width: ScreenUtil().setWidth(333),
-                  height: ScreenUtil().setHeight(95),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.white,
-                      )),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: ScreenUtil().setWidth(14),
-                      ),
-                      const CircleAvatar(
-                        backgroundImage: AssetImage("assets/face4.jpg"),
-                        radius: 30,
-                      ),
-                      SizedBox(
-                        width: ScreenUtil().setWidth(19),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: ScreenUtil().setHeight(15),
-                          ),
-
-                          const Text(
-                            "Person name",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 17,
-                                color: Colors.black),
-                          ),
-
-                          SizedBox(
-                            height: ScreenUtil().setHeight(5),
-                          ),
-                          const Text("Speciality                ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: Colors.black87),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(6),
-                          ),
-                          const Text("+91 9895957143 ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: Colors.black87),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: ScreenUtil().setWidth(90),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: ScreenUtil().setHeight(16),
-                          ),
-                          const Text("Role",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: Colors.black87),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(5),
-                          ),
-
-                        ],
-                      ),
-
-
-
-
-                    ],
-                  ),
-
-                ),
-              ),
-              SizedBox(
-                height: ScreenUtil().setHeight(25),
-              ),
-              Card(
-                color: Colors.white,
-                elevation: 2, // Adjust the elevation as needed
-                shadowColor: Colors.grey, // Set the shadow color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(9.0),
-                ),
-                child: Container(
-                  width: ScreenUtil().setWidth(333),
-                  height: ScreenUtil().setHeight(95),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.white,
-                      )),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: ScreenUtil().setWidth(14),
-                      ),
-                      const CircleAvatar(
-                        backgroundImage: AssetImage("assets/face2.jpg"),
-                        radius: 30,
-                      ),
-                      SizedBox(
-                        width: ScreenUtil().setWidth(19),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: ScreenUtil().setHeight(15),
-                          ),
-
-                          const Text(
-                            "Person name",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 17,
-                                color: Colors.black),
-                          ),
-
-                          SizedBox(
-                            height: ScreenUtil().setHeight(5),
-                          ),
-                          const Text("Speciality                ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: Colors.black87),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(6),
-                          ),
-                          const Text("+91 9895957143 ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: Colors.black87),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: ScreenUtil().setWidth(90),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: ScreenUtil().setHeight(16),
-                          ),
-                          const Text("Role",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: Colors.black87),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(5),
-                          ),
-
-                        ],
-                      ),
-
-
-
-
-                    ],
-                  ),
-
-                ),
-              ),
-              SizedBox(
-                height: ScreenUtil().setHeight(25),
-              ),
-              Card(
-                color: Colors.white,
-                elevation: 2, // Adjust the elevation as needed
-                shadowColor: Colors.grey, // Set the shadow color
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10.0),
-                ),
-                child: Container(
-                  width: ScreenUtil().setWidth(333),
-                  height: ScreenUtil().setHeight(95),
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.white,
-                      )),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: ScreenUtil().setWidth(14),
-                      ),
-                      const CircleAvatar(
-                        backgroundImage: AssetImage("assets/face4.jpg"),
-                        radius: 30,
-                      ),
-                      SizedBox(
-                        width: ScreenUtil().setWidth(19),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: ScreenUtil().setHeight(15),
-                          ),
-
-                          const Text(
-                            "Person name",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                fontSize: 17,
-                                color: Colors.black),
-                          ),
-
-                          SizedBox(
-                            height: ScreenUtil().setHeight(5),
-                          ),
-                          const Text("Speciality                ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 12,
-                                color: Colors.black87),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(6),
-                          ),
-                          const Text("+91 9895957143 ",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w400,
-                                fontSize: 14,
-                                color: Colors.black87),
-                          ),
-                        ],
-                      ),
-                      SizedBox(
-                        width: ScreenUtil().setWidth(90),
-                      ),
-                      Column(
-                        children: [
-                          SizedBox(
-                            height: ScreenUtil().setHeight(16),
-                          ),
-                          const Text("Role",
-                            style: TextStyle(
-                                fontWeight: FontWeight.w500,
-                                fontSize: 14,
-                                color: Colors.black87),
-                          ),
-                          SizedBox(
-                            height: ScreenUtil().setHeight(5),
-                          ),
-
-                        ],
-                      ),
-
-
-
-
-                    ],
-                  ),
-
-                ),
+              Container(width: MediaQuery.of(context).size.width,height: MediaQuery.of(context).size.height,
+                child: ListView.builder(itemCount: userController
+                        .usersModel!.successResponse.data[0].userDetail?.length,
+                    itemBuilder: (context, index) => Column(
+                          children: [
+                            Card(
+                              color: Colors.white,
+                              elevation: 2, // Adjust the elevation as needed
+                              shadowColor: Colors.grey, // Set the shadow color
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(9.0),
+                              ),
+                              child: Container(
+                                width: ScreenUtil().setWidth(333),
+                                height: ScreenUtil().setHeight(95),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(12),
+                                    border: Border.all(
+                                      color: Colors.white,
+                                    )),
+                                child: Row(
+                                  children: [
+                                    SizedBox(
+                                      width: ScreenUtil().setWidth(14),
+                                    ),
+                                    const CircleAvatar(
+                                      backgroundImage:
+                                          AssetImage("assets/face4.jpg"),
+                                      radius: 30,
+                                    ),
+                                    SizedBox(
+                                      width: ScreenUtil().setWidth(19),
+                                    ),
+                                    Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        SizedBox(
+                                          height: ScreenUtil().setHeight(15),
+                                        ),
+                                        Container(width: 150,
+                                          child: Text(
+                                            userController
+                                                                  .usersModel!.successResponse.data[0].userDetail![index].user!.name.toString(),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w700,
+                                                        overflow: TextOverflow.ellipsis,
+                                                fontSize: 17,
+                                                color: Colors.black),
+                                          ),
+                                        ),
+                                        SizedBox(
+                                          height: ScreenUtil().setHeight(5),
+                                        ),
+                                        const Text(
+                                          "Speciality",
+                                          style: TextStyle(
+                                                  overflow: TextOverflow.ellipsis,
+                                              fontWeight: FontWeight.w400,
+                                              fontSize: 12,
+                                              color: Colors.black87),
+                                        ),
+                                        SizedBox(
+                                          height: ScreenUtil().setHeight(6),
+                                        ),
+                                        Expanded(
+                                          child: const Text(
+                                            "+91 9895957143 ",
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                fontSize: 14,
+                                                overflow: TextOverflow.ellipsis,
+                                                color: Colors.black87),
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                   Spacer(),
+                                    Column(
+                                      children: [
+                                        SizedBox(
+                                          height: ScreenUtil().setHeight(16),
+                                        ),
+                                        const Text(
+                                          "Role",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.w500,
+                                              fontSize: 14,
+                                              color: Colors.black87),
+                                        ),
+                                        SizedBox(
+                                          height: ScreenUtil().setHeight(5),
+                                        ),
+                                      ],
+                                    ),
+                                    SizedBox(width: 5,),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        )),
               )
-
-
-
-
-
-
-
-
-
-
-
-
             ],
           ),
         ),

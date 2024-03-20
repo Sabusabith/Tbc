@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qhance_uiii/Screens/login.dart';
 import 'package:get/get.dart';
+import 'package:qhance_uiii/controllers/api/get_user_controller.dart';
+import 'package:qhance_uiii/controllers/api/login_controller.dart';
 
 
-void main() => runApp(MyApp());
+void main(){
+
+runApp(MyApp());
+
+}
+
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
