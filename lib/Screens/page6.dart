@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qhance_uiii/Screens/page7.dart';
 import 'package:qhance_uiii/main.dart';
 
+import '../helper/colors.dart';
+
 class page6 extends StatefulWidget {
   const page6({super.key});
 
@@ -20,7 +22,7 @@ class _page6State extends State<page6> {
         appBar: AppBar(
           backgroundColor: myColor,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
@@ -28,14 +30,14 @@ class _page6State extends State<page6> {
               Navigator.of(context).pop();
             },
           ),
-          title: Text(
+          title: const Text(
             "Item",
             style: TextStyle(color: Colors.white),
           ),
           actions: [
             Row(
               children: [
-                Icon(
+                const Icon(
                   Icons.login_sharp,
                   color: Colors.white,
                 ),
@@ -61,7 +63,7 @@ class _page6State extends State<page6> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: Container(
+                  child: SizedBox(
                     height: ScreenUtil().setHeight(78),
                     width: ScreenUtil().setWidth(335),
                     child: TextFormField(
@@ -71,12 +73,12 @@ class _page6State extends State<page6> {
                         border: InputBorder.none,
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                              BorderSide(width: 1, color: Colors.white
+                              const BorderSide(width: 1, color: Colors.white
                               ),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         contentPadding:
-                            EdgeInsets.symmetric(horizontal: 10, vertical: 55),
+                            const EdgeInsets.symmetric(horizontal: 10, vertical: 55),
                         hintText: "Completion of patients' health records in HIS, Wasfaty program……etc",
                         hintStyle: TextStyle(
                           color: Colors.grey[400],
@@ -84,7 +86,7 @@ class _page6State extends State<page6> {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ),
                 ),
@@ -97,7 +99,7 @@ class _page6State extends State<page6> {
                   SizedBox(
                     width: ScreenUtil().setWidth(25),
                   ),
-                  Text(
+                  const Text(
                     "Action Plan",
                     style: TextStyle(
                         color: Colors.black,
@@ -114,7 +116,7 @@ class _page6State extends State<page6> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  child: Container(
+                  child: SizedBox(
                     height: ScreenUtil().setHeight(138),
                     width: ScreenUtil().setWidth(335),
                     child: TextFormField(
@@ -124,11 +126,11 @@ class _page6State extends State<page6> {
                         border: InputBorder.none,
                         enabledBorder: OutlineInputBorder(
                           borderSide:
-                          BorderSide(width: 1, color: Colors.white),
+                          const BorderSide(width: 1, color: Colors.white),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         contentPadding:
-                        EdgeInsets.symmetric(horizontal: 10,vertical: 110),
+                        const EdgeInsets.symmetric(horizontal: 10,vertical: 110),
                         hintText: "What evidence you need",
 
                         hintStyle: TextStyle(
@@ -137,7 +139,7 @@ class _page6State extends State<page6> {
                           fontWeight: FontWeight.w400,
                         ),
                       ),
-                      style: TextStyle(color: Colors.black),
+                      style: const TextStyle(color: Colors.black),
                     ),
                   ),
                 ),
@@ -145,7 +147,7 @@ class _page6State extends State<page6> {
               SizedBox(
                 height: ScreenUtil().setHeight(300),
               ),
-              Container(
+              SizedBox(
                 height: ScreenUtil().setHeight(59),
                 width: ScreenUtil().setWidth(335),
                 child: ElevatedButton(
@@ -159,9 +161,9 @@ class _page6State extends State<page6> {
                     ),
                     onPressed: () {
                       Navigator.push(
-                          context, MaterialPageRoute(builder: (context) => page7()));
+                          context, MaterialPageRoute(builder: (context) =>  page7()));
                     },
-                    child: Text(
+                    child: const Text(
                       "Send", style: TextStyle(color: Colors.white),)),
               ),
             ],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:qhance_uiii/Screens/page4.dart';
 import 'package:qhance_uiii/main.dart';
 
+import '../helper/colors.dart';
 import '../widgets/container_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';

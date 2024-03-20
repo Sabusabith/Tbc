@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:qhance_uiii/Screens/page6.dart';
+import 'package:qhance_uiii/controllers/api/get_add_item_controller.dart';
 import 'package:qhance_uiii/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
+import '../helper/colors.dart';
 
 class page5 extends StatefulWidget {
   const page5({super.key});
@@ -12,9 +16,12 @@ class page5 extends StatefulWidget {
 }
 
 class _page5State extends State<page5> {
-  int _selectedValue = 1;
+
   int _radiobutton = 1;
   int _unselect = 1;
+
+
+  GetAddItemController controller = Get.put(GetAddItemController());
 
 
   @override
@@ -26,7 +33,7 @@ class _page5State extends State<page5> {
       appBar: AppBar(
         backgroundColor: myColor,
         leading: IconButton(
-          icon: Icon(
+          icon: const Icon(
             Icons.arrow_back,
             color: Colors.white,
           ),
@@ -42,7 +49,7 @@ class _page5State extends State<page5> {
         actions: [
           Row(
             children: [
-              Icon(
+              const Icon(
                 Icons.login_sharp,
                 color: Colors.white,
               ),
@@ -58,36 +65,37 @@ class _page5State extends State<page5> {
             height: ScreenUtil().setHeight(24),
           ),
           Padding(
-            padding: const EdgeInsets.all(13.0),
+            padding:  EdgeInsets.all(13.0),
             child: Card(
               elevation: 2, // Adjust the elevation as needed
               shadowColor: Colors.white, // Set the shadow color
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Container(
+              child: SizedBox(
                 height: ScreenUtil().setHeight(57),
                 width: ScreenUtil().setWidth(335),
                 child: TextFormField(
                   decoration: InputDecoration(
+                    
                     filled: true,
                     fillColor: textfieldform,
                     border: InputBorder.none,
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 1, color: Colors.white),
+                      borderSide:  BorderSide(width: 1, color: Colors.white),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 13, vertical: 25),
-                    hintText: "Task Name",
+                    hintText: controller.itemModel!.successResponse.data[0].taskName,
                     hintStyle: TextStyle(
-
-                      color: Colors.grey[400],
+                   
+                      color: Colors.grey[800],
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  style: TextStyle(color: Colors.black87),
+                  style: const TextStyle(color: Colors.black87),
                 ),
               ),
             ),
@@ -117,7 +125,7 @@ class _page5State extends State<page5> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10.0),
               ),
-              child: Container(
+              child: SizedBox(
                 height: ScreenUtil().setHeight(84),
                 width: ScreenUtil().setWidth(335),
                 child: TextFormField(
@@ -126,19 +134,19 @@ class _page5State extends State<page5> {
                     fillColor: textfieldform,
                     border: InputBorder.none,
                     enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(width: 1, color: Colors.white),
+                      borderSide: const BorderSide(width: 1, color: Colors.white),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     contentPadding:
-                        EdgeInsets.symmetric(horizontal: 10, vertical: 60),
-                    hintText: "What evidence you need",
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 60),
+                    hintText:controller.itemModel!.successResponse.data[0].evidenceOfCompliance ,
                     hintStyle: TextStyle(
-                      color: Colors.grey[400],
+                      color: Colors.grey[800],
                       fontSize: 15,
                       fontWeight: FontWeight.w400,
                     ),
                   ),
-                  style: TextStyle(color: Colors.black87),
+                  style: const TextStyle(color: Colors.black87),
                 ),
               ),
             ),
@@ -167,10 +175,11 @@ class _page5State extends State<page5> {
                   SizedBox(width: ScreenUtil().setWidth(15),),
                   Radio(
                     value: 1,
-                    groupValue: _selectedValue,
+                    groupValue: controller.selectedValue,
                     onChanged: (value) {
                       setState(() {
-                        _selectedValue = value!;
+                      
+                        controller.selectedValue = value!;
                       });
                     },
                     activeColor: myColor,
@@ -182,10 +191,10 @@ class _page5State extends State<page5> {
                   SizedBox(width: ScreenUtil().setWidth(15),),
                   Radio(
                     value: 2,
-                    groupValue: _selectedValue,
+                    groupValue:controller.selectedValue,
                     onChanged: (value) {
                       setState(() {
-                        _selectedValue = value!;
+                       controller.selectedValue = value!;
                       });
                     },
                     activeColor: myColor,
@@ -197,10 +206,10 @@ class _page5State extends State<page5> {
                   SizedBox(width: ScreenUtil().setWidth(15),),
                   Radio(
                     value: 3,
-                    groupValue: _selectedValue,
+                    groupValue: controller.selectedValue,
                     onChanged: (value) {
                       setState(() {
-                        _selectedValue = value!;
+                      controller.selectedValue = value!;
                       });
                     },
                     activeColor: myColor,
@@ -355,7 +364,7 @@ class _page5State extends State<page5> {
           ),
         
           SizedBox(height: ScreenUtil().setHeight(110),),
-          Container(
+          SizedBox(
             height: ScreenUtil().setHeight(56),
             width: ScreenUtil().setWidth(335),
             child: ElevatedButton(
@@ -370,7 +379,7 @@ class _page5State extends State<page5> {
                 onPressed: () {
 
                 },
-                child: Text(
+                child: const Text(
                   "Add", style: TextStyle(color: Colors.white),)),
           )
         

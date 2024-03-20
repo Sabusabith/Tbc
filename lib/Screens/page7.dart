@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:qhance_uiii/Screens/page2.dart';
+import 'package:qhance_uiii/controllers/api/login_controller.dart';
 import 'package:qhance_uiii/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qhance_uiii/widgets/container_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qhance_uiii/widgets/primary_container_widget.dart';
 
-class page7 extends StatefulWidget {
-  const page7({super.key});
+import '../controllers/api/get_zone_controller.dart';
+import '../helper/colors.dart';
 
-  @override
-  State<page7> createState() => _page7State();
-}
+class page7 extends StatelessWidget {
+ page7({super.key});
+GetZoneController controller = Get.put(GetZoneController());
 
-class _page7State extends State<page7> {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -23,7 +25,7 @@ class _page7State extends State<page7> {
         appBar: AppBar(
           backgroundColor: myColor,
           leading: IconButton(
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_back,
               color: Colors.white,
             ),
@@ -38,11 +40,13 @@ class _page7State extends State<page7> {
           ),
           actions: [
             IconButton(
-              onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>page2()));
+              onPressed: ()async{
+                     var authid = await Get.find<LoginController>().authid;
+                  controller.getZones(authid);
+                Navigator.push(context, MaterialPageRoute(builder: (context)=> page2()));
               },
               icon:
-              Icon(
+              const Icon(
                 Icons.logout,
                 color: Colors.white,
               ),
@@ -114,7 +118,7 @@ class _page7State extends State<page7> {
                       SizedBox(
                         width: ScreenUtil().setWidth(14),
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         backgroundImage: AssetImage("assets/face4.jpg"),
                         radius: 30,
                       ),
@@ -127,7 +131,7 @@ class _page7State extends State<page7> {
                             height: ScreenUtil().setHeight(15),
                           ),
 
-                          Text(
+                          const Text(
                             "Person name",
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
@@ -138,7 +142,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(5),
                           ),
-                          Text("Speciality                ",
+                          const Text("Speciality                ",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
@@ -147,7 +151,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(6),
                           ),
-                          Text("+91 9895957143 ",
+                          const Text("+91 9895957143 ",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 14,
@@ -163,7 +167,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(16),
                           ),
-                          Text("Role",
+                          const Text("Role",
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,
@@ -207,7 +211,7 @@ class _page7State extends State<page7> {
                       SizedBox(
                         width: ScreenUtil().setWidth(14),
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         backgroundImage: AssetImage("assets/face2.jpg"),
                         radius: 30,
                       ),
@@ -220,7 +224,7 @@ class _page7State extends State<page7> {
                             height: ScreenUtil().setHeight(15),
                           ),
 
-                          Text(
+                          const Text(
                             "Person name",
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
@@ -231,7 +235,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(5),
                           ),
-                          Text("Speciality                ",
+                          const Text("Speciality                ",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
@@ -240,7 +244,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(6),
                           ),
-                          Text("+91 9895957143 ",
+                          const Text("+91 9895957143 ",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 14,
@@ -256,7 +260,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(16),
                           ),
-                          Text("Role",
+                          const Text("Role",
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,
@@ -300,7 +304,7 @@ class _page7State extends State<page7> {
                       SizedBox(
                         width: ScreenUtil().setWidth(14),
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         backgroundImage: AssetImage("assets/face4.jpg"),
                         radius: 30,
                       ),
@@ -313,7 +317,7 @@ class _page7State extends State<page7> {
                             height: ScreenUtil().setHeight(15),
                           ),
 
-                          Text(
+                          const Text(
                             "Person name",
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
@@ -324,7 +328,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(5),
                           ),
-                          Text("Speciality                ",
+                          const Text("Speciality                ",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
@@ -333,7 +337,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(6),
                           ),
-                          Text("+91 9895957143 ",
+                          const Text("+91 9895957143 ",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 14,
@@ -349,7 +353,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(16),
                           ),
-                          Text("Role",
+                          const Text("Role",
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,
@@ -393,7 +397,7 @@ class _page7State extends State<page7> {
                       SizedBox(
                         width: ScreenUtil().setWidth(14),
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         backgroundImage: AssetImage("assets/face2.jpg"),
                         radius: 30,
                       ),
@@ -406,7 +410,7 @@ class _page7State extends State<page7> {
                             height: ScreenUtil().setHeight(15),
                           ),
 
-                          Text(
+                          const Text(
                             "Person name",
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
@@ -417,7 +421,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(5),
                           ),
-                          Text("Speciality                ",
+                          const Text("Speciality                ",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
@@ -426,7 +430,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(6),
                           ),
-                          Text("+91 9895957143 ",
+                          const Text("+91 9895957143 ",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 14,
@@ -442,7 +446,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(16),
                           ),
-                          Text("Role",
+                          const Text("Role",
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,
@@ -486,7 +490,7 @@ class _page7State extends State<page7> {
                       SizedBox(
                         width: ScreenUtil().setWidth(14),
                       ),
-                      CircleAvatar(
+                      const CircleAvatar(
                         backgroundImage: AssetImage("assets/face4.jpg"),
                         radius: 30,
                       ),
@@ -499,7 +503,7 @@ class _page7State extends State<page7> {
                             height: ScreenUtil().setHeight(15),
                           ),
 
-                          Text(
+                          const Text(
                             "Person name",
                             style: TextStyle(
                                 fontWeight: FontWeight.w700,
@@ -510,7 +514,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(5),
                           ),
-                          Text("Speciality                ",
+                          const Text("Speciality                ",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 12,
@@ -519,7 +523,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(6),
                           ),
-                          Text("+91 9895957143 ",
+                          const Text("+91 9895957143 ",
                             style: TextStyle(
                                 fontWeight: FontWeight.w400,
                                 fontSize: 14,
@@ -535,7 +539,7 @@ class _page7State extends State<page7> {
                           SizedBox(
                             height: ScreenUtil().setHeight(16),
                           ),
-                          Text("Role",
+                          const Text("Role",
                             style: TextStyle(
                                 fontWeight: FontWeight.w500,
                                 fontSize: 14,

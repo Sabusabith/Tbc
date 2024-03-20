@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qhance_uiii/Screens/page2.dart';
 import 'package:qhance_uiii/Screens/page3.dart';
-import 'package:qhance_uiii/main.dart';
+
+
+import '../helper/colors.dart';
 
 class page1 extends StatefulWidget {
   const page1({super.key});
@@ -21,7 +23,7 @@ class _page1State extends State<page1> {
       child: Scaffold(
         appBar: AppBar(
             automaticallyImplyLeading: false,
-            title: Text(
+            title: const Text(
               "Zones",
               style: TextStyle(fontSize: 20, color: Colors.white),
             ),
@@ -30,7 +32,7 @@ class _page1State extends State<page1> {
             actions: [
               Row(
                 children: [
-                  Icon(
+                  const Icon(
                     Icons.login_sharp,
                     color: Colors.white,
                     size: 23,
@@ -145,7 +147,7 @@ class _page1State extends State<page1> {
                   InkWell(
                     onTap: () {
                       Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => page3()));
+                          MaterialPageRoute(builder: (context) => const page3()));
                     },
                     child: Container(
                       height: ScreenUtil().setHeight(152.72),
