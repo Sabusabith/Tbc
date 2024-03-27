@@ -82,6 +82,7 @@ flutter:
     - assets/Vector.png
     - assets/face4.jpg
     - assets/face2.jpg
+    - assets/
 
 
   # To add assets to your application, add an assets section, like this:

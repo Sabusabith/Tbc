@@ -118,7 +118,7 @@ passData() {
                     ),
                     contentPadding:
                         EdgeInsets.symmetric(horizontal: 15, vertical: 18),
-                    hintText: 'Test Task 2',
+                  
                     hintStyle: TextStyle(
                    
                       color: Colors.grey[800],
@@ -399,7 +399,7 @@ passData() {
             ],
           ),
         
-          SizedBox(height: ScreenUtil().setHeight(70),),
+          SizedBox(height: ScreenUtil().setHeight(45),),
           SizedBox(
             height: ScreenUtil().setHeight(56),
             width: ScreenUtil().setWidth(335),

@@ -36,10 +36,7 @@ class page8 extends StatelessWidget {
               onPressed: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) => const page5()));
               },
-              icon: const Icon(
-                Icons.logout,
-                color: Colors.white,
-              ),
+              icon:  Image.asset('assets/go.png',height: 25,),
             )
           ],
         ),
