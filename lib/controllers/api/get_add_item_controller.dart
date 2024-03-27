@@ -18,8 +18,7 @@ class GetAddItemController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-               var authid = Get.find<LoginController>().authid;
-    getItems(authid);
+   
   }
   GetAddItemModel? itemModel;
   int? pervisite;

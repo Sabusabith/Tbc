@@ -1,27 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qhance_uiii/Screens/login.dart';
 import 'package:get/get.dart';
-import 'package:qhance_uiii/controllers/api/get_user_controller.dart';
+import 'package:qhance_uiii/Screens/splash.dart';
 import 'package:qhance_uiii/controllers/api/login_controller.dart';
+import 'package:qhance_uiii/controllers/api/splash_controller.dart';
+import 'package:qhance_uiii/controllers/api/get_user_controller.dart';
 
-
-void main(){
-
-runApp(MyApp());
-
+void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(MyApp());
 }
 
-
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
+    final SplashController splashController = Get.put(SplashController());
+    
+
     return ScreenUtilInit(
       designSize: const Size(360, 850),
       minTextAdapt: true,
-      splitScreenMode: true,
+      splitScreenMode: false, // Initialize splitScreenMode property
       builder: (_, child) {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
@@ -33,7 +32,7 @@ class MyApp extends StatelessWidget {
           home: child,
         );
       },
-      child: login(), // Replace with your actual login screen implementation
+      child: Splash()
     );
   }
 }

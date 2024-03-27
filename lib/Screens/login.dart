@@ -61,83 +61,77 @@ class login extends StatelessWidget {
                 height: ScreenUtil().setHeight(65),
               ),
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Card(
-                  elevation: 5, // Adjust the elevation as needed
-                  shadowColor: Colors.white, // Set the shadow color
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-                  child: SizedBox(
-                    height: ScreenUtil().setHeight(57),
-                    width: ScreenUtil().setWidth(335),
-                    child: TextFormField(
-                      controller: controller.emailController,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.person,
-                          color: myColor,
-                        ),
-                        filled: true,
-                        fillColor: textfieldform,
-                        border: InputBorder.none,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(width: 1, color: Colors.white70),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 13, vertical: 25),
-                        hintText: "Enter Your Id",
-                        hintStyle: TextStyle(
-                          color: Colors.grey[400],
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                        ),
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Container(height: 55,
+                  decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10),border: Border.all(color: Colors.white),
+                  boxShadow: [BoxShadow(
+                      color: Color.fromARGB(255, 191, 191, 191),
+                blurRadius: 2.0,
+                spreadRadius: 0.0,
+                offset: Offset(2.0, 2.0), 
+                  )]
+                ),
+                 
+                  child: TextFormField(
+                    controller: controller.emailController,
+                    decoration: InputDecoration(
+                      contentPadding: EdgeInsets.symmetric(vertical: 15),
+                      prefixIcon: Icon(
+                        Icons.person,
+                        color: myColor,
                       ),
-                      style: const TextStyle(color: Colors.black87),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: InputBorder.none,
+
+                     
+                    
+                      hintText: "Password",
+                      hintStyle: TextStyle(
+                        color: Colors.grey[400],
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
+                    style: const TextStyle(color: Colors.black87),
                   ),
                 ),
               ),
+              SizedBox(height:20,),
               Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Card(
-                  elevation: 5, // Adjust the elevation as needed
-                  shadowColor: Colors.white, // Set the shadow color
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10.0),
-                  ),
-
-                  child: SizedBox(
-                    height: ScreenUtil().setHeight(57),
-                    width: ScreenUtil().setWidth(335),
-                    child: TextFormField(
-                      controller: controller.passController,
-                      decoration: InputDecoration(
-                        prefixIcon: Icon(
-                          Icons.lock,
-                          color: myColor,
-                        ),
-                        filled: true,
-                        fillColor: textfieldform,
-                        border: InputBorder.none,
-                        enabledBorder: OutlineInputBorder(
-                          borderSide:
-                              const BorderSide(width: 1, color: Colors.white70),
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 13, vertical: 25),
-                        hintText: "Password",
-                        hintStyle: TextStyle(
-                          color: Colors.grey[400],
-                          fontSize: 15,
-                          fontWeight: FontWeight.w400,
-                        ),
+                padding: EdgeInsets.symmetric(horizontal: 15),
+                child: Container(height: 55,
+                  decoration: BoxDecoration(color: Colors.white,borderRadius: BorderRadius.circular(10),border: Border.all(color: Colors.white),
+                  boxShadow: [BoxShadow(
+                      color: Color.fromARGB(255, 191, 191, 191),
+                blurRadius: 2.0,
+                spreadRadius: 0.0,
+                offset: Offset(2.0, 2.0), 
+                  )]
+                ),
+                 
+                  child: TextFormField(
+                    controller: controller.passController,
+                    decoration: InputDecoration(
+                       contentPadding: EdgeInsets.symmetric(vertical: 15),
+                      prefixIcon: Icon(
+                        Icons.lock,
+                        color: myColor,
                       ),
-                      style: const TextStyle(color: Colors.black87),
+                      filled: true,
+                      fillColor: Colors.white,
+                      border: InputBorder.none,
+
+                     
+                    
+                      hintText: "Password",
+                      hintStyle: TextStyle(
+                        color: Colors.grey[400],
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                      ),
                     ),
+                    style: const TextStyle(color: Colors.black87),
                   ),
                 ),
               ),

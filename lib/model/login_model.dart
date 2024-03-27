@@ -10,20 +10,24 @@ String loginModelToJson(LoginModel data) => json.encode(data.toJson());
 
 class LoginModel {
     bool success;
+    String apiToken;
     Message message;
 
     LoginModel({
         required this.success,
+        required this.apiToken,
         required this.message,
     });
 
     factory LoginModel.fromJson(Map<String, dynamic> json) => LoginModel(
         success: json["success"],
+        apiToken: json["api_token"],
         message: Message.fromJson(json["message"]),
     );
 
     Map<String, dynamic> toJson() => {
         "success": success,
+        "api_token": apiToken,
         "message": message.toJson(),
     };
 }
@@ -32,17 +36,21 @@ class Message {
     String? id;
     String? name;
     String? email;
+    String? phone;
+    String? apiToken;
     int? status;
     String? userType;
     dynamic emailVerifiedAt;
     DateTime createdAt;
     DateTime updatedAt;
-    List<UserDetail>? userDetail;
+    List<UserDetail> userDetail;
 
     Message({
         required this.id,
         required this.name,
         required this.email,
+        required this.phone,
+        required this.apiToken,
         required this.status,
         required this.userType,
         required this.emailVerifiedAt,
@@ -55,6 +63,8 @@ class Message {
         id: json["id"],
         name: json["name"],
         email: json["email"],
+        phone: json["phone"],
+        apiToken: json["api_token"],
         status: json["status"],
         userType: json["user_type"],
         emailVerifiedAt: json["email_verified_at"],
@@ -67,29 +77,33 @@ class Message {
         "id": id,
         "name": name,
         "email": email,
+        "phone": phone,
+        "api_token": apiToken,
         "status": status,
         "user_type": userType,
         "email_verified_at": emailVerifiedAt,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "user_detail": List<dynamic>.from(userDetail!.map((x) => x.toJson())),
+        "user_detail": List<dynamic>.from(userDetail.map((x) => x.toJson())),
     };
 }
 
 class UserDetail {
-    String id;
-    String userId;
-    String phcDetailId;
-    String phcTbcCodeId;
-    String specializationId;
+    String? id;
+    String? userId;
+    String? roleId;
+    String? phcDetailId;
+    String? phcTbcCodeId;
+    String? specializationId;
     dynamic createdById;
-    String remarks;
+    String? remarks;
     DateTime createdAt;
     DateTime updatedAt;
 
     UserDetail({
         required this.id,
         required this.userId,
+        required this.roleId,
         required this.phcDetailId,
         required this.phcTbcCodeId,
         required this.specializationId,
@@ -102,6 +116,7 @@ class UserDetail {
     factory UserDetail.fromJson(Map<String, dynamic> json) => UserDetail(
         id: json["id"],
         userId: json["user_id"],
+        roleId: json["role_id"],
         phcDetailId: json["phc_detail_id"],
         phcTbcCodeId: json["phc_tbc_code_id"],
         specializationId: json["specialization_id"],
@@ -114,6 +129,7 @@ class UserDetail {
     Map<String, dynamic> toJson() => {
         "id": id,
         "user_id": userId,
+        "role_id": roleId,
         "phc_detail_id": phcDetailId,
         "phc_tbc_code_id": phcTbcCodeId,
         "specialization_id": specializationId,
@@ -123,3 +139,54 @@ class UserDetail {
         "updated_at": updatedAt.toIso8601String(),
     };
 }
+
+
+
+// import 'package:get/get.dart';
+// import 'package:get/get_core/src/get_main.dart';
+// import 'package:get/get_state_manager/get_state_manager.dart';
+// import 'package:qhance_uiii/Screens/page7.dart';
+// import 'package:qhance_uiii/utils/shared_data.dart';
+
+// import '../../Screens/login.dart';
+// import 'get_user_controller.dart';
+// import 'login_controller.dart';
+
+// class SplashController extends GetxController {
+//   GetUserssController userssController = Get.put(GetUserssController());
+//   LoginController loginController = Get.put(LoginController());
+
+//   @override
+//   void onInit() {
+//     super.onInit();
+//     checkUserToken();
+//   }
+
+//   void checkUserToken() async {
+//     var newToken = await loginController.apitoken;
+//     var storedToken = await getSavedObject('token');
+//     var phc = await getSavedObject('phc');
+//     print("Stored token : $storedToken, New token : $newToken");
+    
+//     if (storedToken != null && storedToken == newToken) {
+//       // Token exists and is the same as the new token
+//       // Navigate to page7
+//       userssController.getUsersFromApi(phc);
+//       Get.offAll(() => page7());
+//     } else if (storedToken != null && storedToken != newToken) {
+//       // New token is different from the stored token
+//       // Clear existing token and navigate to login
+//       clearSavedObject('token');
+//       clearSavedObject('phc');
+//       Get.offAll(() => login());
+//     }else if(storedToken != null){
+//    userssController.getUsersFromApi(phc);
+//       Get.offAll(() => page7());
+//     }
+    
+//      else {
+//       // No token found, navigate to login
+//       Get.offAll(() => login());
+//     }
+//   }
+// }

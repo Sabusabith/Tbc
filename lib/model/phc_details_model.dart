@@ -27,7 +27,7 @@ class GetPhcDetailModel {
 class SuccessResponse {
     bool statusCode;
     int resposeCode;
-    List<Datum> data;
+    List<Datum>? data;
 
     SuccessResponse({
         required this.statusCode,
@@ -44,7 +44,7 @@ class SuccessResponse {
     Map<String, dynamic> toJson() => {
         "statusCode": statusCode,
         "resposeCode": resposeCode,
-        "data": List<dynamic>.from(data.map((x) => x.toJson())),
+        "data": List<dynamic>.from(data!.map((x) => x.toJson())),
     };
 }
 
@@ -57,6 +57,7 @@ class Datum {
     int? status;
     DateTime createdAt;
     DateTime updatedAt;
+    Zone? zone;
 
     Datum({
         required this.id,
@@ -67,6 +68,7 @@ class Datum {
         required this.status,
         required this.createdAt,
         required this.updatedAt,
+        required this.zone,
     });
 
     factory Datum.fromJson(Map<String, dynamic> json) => Datum(
@@ -78,6 +80,7 @@ class Datum {
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
+        zone: Zone.fromJson(json["zone"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -85,6 +88,47 @@ class Datum {
         "zone_id": zoneId,
         "created_by_id": createdById,
         "phc_name": phcName,
+        "remarks": remarks,
+        "status": status,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "zone": zone!.toJson(),
+    };
+}
+
+class Zone {
+    String? id;
+    dynamic createdById;
+    String? zoneName;
+    String? remarks;
+    int? status;
+    DateTime createdAt;
+    DateTime updatedAt;
+
+    Zone({
+        required this.id,
+        required this.createdById,
+        required this.zoneName,
+        required this.remarks,
+        required this.status,
+        required this.createdAt,
+        required this.updatedAt,
+    });
+
+    factory Zone.fromJson(Map<String, dynamic> json) => Zone(
+        id: json["id"],
+        createdById: json["created_by_id"],
+        zoneName: json["zone_name"],
+        remarks: json["remarks"],
+        status: json["status"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "created_by_id": createdById,
+        "zone_name": zoneName,
         "remarks": remarks,
         "status": status,
         "created_at": createdAt.toIso8601String(),

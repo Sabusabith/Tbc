@@ -7,6 +7,8 @@ import 'package:qhance_uiii/model/zoneModel.dart';
 import 'package:qhance_uiii/utils/api_configs.dart';
 import 'package:qhance_uiii/utils/api_provider.dart';
 
+import '../../utils/shared_data.dart';
+
 
 // This api called in mobile screen Southern zones Domains
 class GetZoneController extends GetxController{
@@ -15,16 +17,19 @@ class GetZoneController extends GetxController{
   void onInit() {
     // TODO: implement onInit
     super.onInit();
-       var authid = Get.find<LoginController>().authid;
-    getZones(authid);
+   getZones();
+ 
   }
   RxList<Datum> zoneList = <Datum>[].obs;
 
-    getZones(authid)async{
-try{
-    var url = AppConstants.baseUrl + '/api/getZone/$authid';
+    getZones()async{
+        var token = await getSavedObject('token');
 
-    Response response = await ApiProvider().get(url);
+try{
+    var url = AppConstants.baseUrl + '/api/getZone';
+    
+
+    Response response = await ApiProvider().get(url,token: token);
    
     if (response.statusCode == 200 && response.data["SuccessResponse"]['statusCode']==true) {
   ZoneModel zoneModel = ZoneModel.fromJson(response.data);

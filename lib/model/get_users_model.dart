@@ -60,7 +60,7 @@ class Datum {
     DateTime updatedAt;
     PhcDetail? zone;
     PhcDetail? phcDetail;
-    List<UserDetail>? userDetail;
+    List<UserDetail> userDetail;
 
     Datum({
         required this.id,
@@ -104,7 +104,7 @@ class Datum {
         "updated_at": updatedAt.toIso8601String(),
         "zone": zone!.toJson(),
         "phc_detail": phcDetail!.toJson(),
-        "user_detail": List<dynamic>.from(userDetail!.map((x) => x.toJson())),
+        "user_detail": List<dynamic>.from(userDetail.map((x) => x.toJson())),
     };
 }
 
@@ -159,6 +159,7 @@ class PhcDetail {
 class UserDetail {
     String? id;
     String? userId;
+    String? roleId;
     String? phcDetailId;
     String? phcTbcCodeId;
     String? specializationId;
@@ -167,10 +168,13 @@ class UserDetail {
     DateTime createdAt;
     DateTime updatedAt;
     User? user;
+    Role? role;
+    Role? specialization;
 
     UserDetail({
         required this.id,
         required this.userId,
+        required this.roleId,
         required this.phcDetailId,
         required this.phcTbcCodeId,
         required this.specializationId,
@@ -179,11 +183,14 @@ class UserDetail {
         required this.createdAt,
         required this.updatedAt,
         required this.user,
+        required this.role,
+        required this.specialization,
     });
 
     factory UserDetail.fromJson(Map<String, dynamic> json) => UserDetail(
         id: json["id"],
         userId: json["user_id"],
+        roleId: json["role_id"],
         phcDetailId: json["phc_detail_id"],
         phcTbcCodeId: json["phc_tbc_code_id"],
         specializationId: json["specialization_id"],
@@ -192,11 +199,14 @@ class UserDetail {
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
         user: User.fromJson(json["user"]),
+        role: Role.fromJson(json["role"]),
+        specialization: Role.fromJson(json["specialization"]),
     );
 
     Map<String, dynamic> toJson() => {
         "id": id,
         "user_id": userId,
+        "role_id": roleId,
         "phc_detail_id": phcDetailId,
         "phc_tbc_code_id": phcTbcCodeId,
         "specialization_id": specializationId,
@@ -205,6 +215,48 @@ class UserDetail {
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
         "user": user!.toJson(),
+        "role": role!.toJson(),
+        "specialization": specialization!.toJson(),
+    };
+}
+
+class Role {
+    String? id;
+    String? createdById;
+    String? roleName;
+    int? status;
+    DateTime createdAt;
+    DateTime updatedAt;
+    String? speciality;
+
+    Role({
+        required this.id,
+        required this.createdById,
+        this.roleName,
+        required this.status,
+        required this.createdAt,
+        required this.updatedAt,
+        this.speciality,
+    });
+
+    factory Role.fromJson(Map<String, dynamic> json) => Role(
+        id: json["id"],
+        createdById: json["created_by_id"],
+        roleName: json["role_name"],
+        status: json["status"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        speciality: json["speciality"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "created_by_id": createdById,
+        "role_name": roleName,
+        "status": status,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "speciality": speciality,
     };
 }
 
@@ -212,6 +264,8 @@ class User {
     String? id;
     String? name;
     String? email;
+    String? phone;
+    String? apiToken;
     int? status;
     String? userType;
     dynamic emailVerifiedAt;
@@ -222,6 +276,8 @@ class User {
         required this.id,
         required this.name,
         required this.email,
+        required this.phone,
+        required this.apiToken,
         required this.status,
         required this.userType,
         required this.emailVerifiedAt,
@@ -233,6 +289,8 @@ class User {
         id: json["id"],
         name: json["name"],
         email: json["email"],
+        phone: json["phone"],
+        apiToken: json["api_token"],
         status: json["status"],
         userType: json["user_type"],
         emailVerifiedAt: json["email_verified_at"],
@@ -244,6 +302,8 @@ class User {
         "id": id,
         "name": name,
         "email": email,
+        "phone": phone,
+        "api_token": apiToken,
         "status": status,
         "user_type": userType,
         "email_verified_at": emailVerifiedAt,

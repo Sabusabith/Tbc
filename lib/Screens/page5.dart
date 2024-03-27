@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:qhance_uiii/Screens/page6.dart';
-import 'package:qhance_uiii/controllers/api/get_add_item_controller.dart';
+import 'package:qhance_uiii/controllers/api/additem_controller.dart';
 import 'package:qhance_uiii/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:qhance_uiii/utils/toast.dart';
 
 import '../helper/colors.dart';
 
@@ -16,12 +17,48 @@ class page5 extends StatefulWidget {
 }
 
 class _page5State extends State<page5> {
+ 
+AdditemController controller = Get.put(AdditemController());
+
+  final taskcontroller = TextEditingController();
+  final evidenccecontroller = TextEditingController();
 
   int _radiobutton = 1;
   int _unselect = 1;
+  int selectedindex = 1;
 
+passData() {
+  // Check if any of the fields are empty
+  if (taskcontroller.text.isEmpty ||
+      evidenccecontroller.text.isEmpty ||
+      selectedindex == null ||
+      _radiobutton == null ||
+      _unselect == null) {
+    // Show an error message indicating that all fields are required
 
-  GetAddItemController controller = Get.put(GetAddItemController());
+    customSnackBar('Please fill in all fields', 'Please fill in all fields', context,isError: true);
+    // ScaffoldMessenger.of(context).showSnackBar(
+
+    //   SnackBar(
+    //     content: Text('Please fill in all fields'),
+    //     backgroundColor: Colors.red,
+    //   ),
+    // );
+    return; // Exit the method if any field is empty
+  }
+
+  // If all fields are filled, proceed with adding the data
+  Map pass = {
+    'task_name': taskcontroller.text,
+    'evidence_of_compliance': evidenccecontroller.text,
+    'per_visit': selectedindex,
+    'staff_availability': _radiobutton,
+    'awareness_trained': _unselect,
+    'remarks': 'dfd'
+  };
+  controller.addItem(pass, context);
+}
+
 
 
   @override
@@ -46,17 +83,7 @@ class _page5State extends State<page5> {
           style: GoogleFonts.inter(
               fontSize: 19, color: Colors.white, fontWeight: FontWeight.w600),
         ),
-        actions: [
-          Row(
-            children: [
-              const Icon(
-                Icons.login_sharp,
-                color: Colors.white,
-              ),
-              SizedBox(width: ScreenUtil().setWidth(10))
-            ],
-          )
-        ],
+     
       ),
       backgroundColor: background,
       body: SingleChildScrollView(
@@ -76,18 +103,22 @@ class _page5State extends State<page5> {
                 height: ScreenUtil().setHeight(57),
                 width: ScreenUtil().setWidth(335),
                 child: TextFormField(
+              controller: taskcontroller,
                   decoration: InputDecoration(
-                    
+                    focusedBorder:OutlineInputBorder(
+                      borderSide:  BorderSide(width: 1, color: Colors.white),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ) ,
                     filled: true,
-                    fillColor: textfieldform,
+                    fillColor: Colors.white,
                     border: InputBorder.none,
                     enabledBorder: OutlineInputBorder(
                       borderSide:  BorderSide(width: 1, color: Colors.white),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     contentPadding:
-                        EdgeInsets.symmetric(horizontal: 13, vertical: 25),
-                    hintText: controller.itemModel!.successResponse.data[0].taskName,
+                        EdgeInsets.symmetric(horizontal: 15, vertical: 18),
+                    hintText: 'Test Task 2',
                     hintStyle: TextStyle(
                    
                       color: Colors.grey[800],
@@ -126,20 +157,26 @@ class _page5State extends State<page5> {
                 borderRadius: BorderRadius.circular(10.0),
               ),
               child: SizedBox(
-                height: ScreenUtil().setHeight(84),
-                width: ScreenUtil().setWidth(335),
+           
                 child: TextFormField(
+                  maxLines: 4,
+                  controller: evidenccecontroller,
                   decoration: InputDecoration(
+                    
                     filled: true,
-                    fillColor: textfieldform,
+                    fillColor: Colors.white,
                     border: InputBorder.none,
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(width: 1, color: Colors.white),
+                      borderRadius: BorderRadius.circular(10.0),
+                    ) ,
                     enabledBorder: OutlineInputBorder(
                       borderSide: const BorderSide(width: 1, color: Colors.white),
                       borderRadius: BorderRadius.circular(10.0),
                     ),
                     contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 10, vertical: 60),
-                    hintText:controller.itemModel!.successResponse.data[0].evidenceOfCompliance ,
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
+                 
                     hintStyle: TextStyle(
                       color: Colors.grey[800],
                       fontSize: 15,
@@ -175,11 +212,10 @@ class _page5State extends State<page5> {
                   SizedBox(width: ScreenUtil().setWidth(15),),
                   Radio(
                     value: 1,
-                    groupValue: controller.selectedValue,
+                    groupValue: selectedindex,
                     onChanged: (value) {
                       setState(() {
-                      
-                        controller.selectedValue = value!;
+                      selectedindex = value!;
                       });
                     },
                     activeColor: myColor,
@@ -191,10 +227,10 @@ class _page5State extends State<page5> {
                   SizedBox(width: ScreenUtil().setWidth(15),),
                   Radio(
                     value: 2,
-                    groupValue:controller.selectedValue,
+                    groupValue:selectedindex,
                     onChanged: (value) {
                       setState(() {
-                       controller.selectedValue = value!;
+                          selectedindex = value!;
                       });
                     },
                     activeColor: myColor,
@@ -206,10 +242,10 @@ class _page5State extends State<page5> {
                   SizedBox(width: ScreenUtil().setWidth(15),),
                   Radio(
                     value: 3,
-                    groupValue: controller.selectedValue,
+                    groupValue:selectedindex,
                     onChanged: (value) {
                       setState(() {
-                      controller.selectedValue = value!;
+                       selectedindex = value!;
                       });
                     },
                     activeColor: myColor,
@@ -363,7 +399,7 @@ class _page5State extends State<page5> {
             ],
           ),
         
-          SizedBox(height: ScreenUtil().setHeight(110),),
+          SizedBox(height: ScreenUtil().setHeight(70),),
           SizedBox(
             height: ScreenUtil().setHeight(56),
             width: ScreenUtil().setWidth(335),
@@ -377,7 +413,7 @@ class _page5State extends State<page5> {
         
                 ),
                 onPressed: () {
-
+ passData();
                 },
                 child: const Text(
                   "Add", style: TextStyle(color: Colors.white),)),

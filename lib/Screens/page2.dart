@@ -7,13 +7,14 @@ import 'package:qhance_uiii/controllers/api/get_phc_detail_controller.dart';
 import 'package:qhance_uiii/controllers/api/get_zone_controller.dart';
 import 'package:qhance_uiii/controllers/api/login_controller.dart';
 import 'package:qhance_uiii/main.dart';
+import 'package:qhance_uiii/utils/shared_data.dart';
 
 import '../helper/colors.dart';
 
 class page2 extends StatelessWidget {
  page2({super.key});
 GetZoneController zoneController = Get.put(GetZoneController());
-GetPhcDetailsController phcDetailsController = Get.put(GetPhcDetailsController());
+ GetPhcDetailsController controller = Get.put(GetPhcDetailsController());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -65,8 +66,8 @@ GetPhcDetailsController phcDetailsController = Get.put(GetPhcDetailsController()
                     itemCount:zoneController.zoneList.length,
                     itemBuilder: (context, index) => InkWell(
                       onTap: ()async {
-                            var authid = await Get.find<LoginController>().authid;
-                        phcDetailsController.getPhcDetails(authid);
+                    
+                        controller.getPhcDetails( zoneController.zoneList[index].id);
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) => page8()));
                       },
