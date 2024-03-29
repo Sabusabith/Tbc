@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:qhance_uiii/Screens/page8.dart';
+import 'package:qhance_uiii/Screens/type3/activities.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qhance_uiii/controllers/api/get_phc_detail_controller.dart';
 import 'package:qhance_uiii/controllers/api/get_zone_controller.dart';
@@ -10,7 +10,7 @@ import 'package:qhance_uiii/controllers/api/login_controller.dart';
 import 'package:qhance_uiii/main.dart';
 import 'package:qhance_uiii/utils/shared_data.dart';
 
-import '../helper/colors.dart';
+import '../../helper/colors.dart';
 
 class page2 extends StatelessWidget {
  page2({super.key});

@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:qhance_uiii/Screens/page5.dart';
+import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
+import 'package:qhance_uiii/Screens/type2/domins.dart';
+import 'package:qhance_uiii/Screens/type3/additem.dart';
 import 'package:qhance_uiii/helper/colors.dart';
 import 'package:qhance_uiii/main.dart';
 import 'package:qhance_uiii/widgets/textfield_widget.dart';
@@ -37,7 +40,9 @@ class _page4State extends State<page4> {
             actions: [
               Row(
                 children: [
-                  const Icon(Icons.login_sharp, color: Colors.white,),
+                GestureDetector(onTap: (){
+                  Get.to(page1());
+                },child: Image.asset('assets/go.png',height: 25,)),
                   SizedBox(width: ScreenUtil().setWidth(10))
                 ],
               )
@@ -64,6 +69,10 @@ class _page4State extends State<page4> {
                       filled: true,
                       fillColor: textfieldform,
                       border: InputBorder.none,
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: const BorderSide(width: 1, color: Colors.white),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
                       enabledBorder: OutlineInputBorder(
                         borderSide: const BorderSide(width: 1, color: Colors.white),
                         borderRadius: BorderRadius.circular(10.0),
@@ -99,6 +108,10 @@ color: Colors.grey[500],
                           filled: true,
                           fillColor: textfieldform,
                           border: InputBorder.none,
+                          focusedBorder:OutlineInputBorder(
+                            borderSide: const BorderSide(width: 1, color: Colors.white),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ), 
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(width: 1, color: Colors.white),
                             borderRadius: BorderRadius.circular(10.0),
@@ -136,6 +149,10 @@ color: Colors.grey[500],
                           filled: true,
                           fillColor: textfieldform,
                           border: InputBorder.none,
+                          focusedBorder:OutlineInputBorder(
+                            borderSide: const BorderSide(width: 1, color: Colors.white70),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ), 
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(width: 1, color: Colors.white70),
                             borderRadius: BorderRadius.circular(10.0),
@@ -175,6 +192,10 @@ color: Colors.grey[500],
                           filled: true,
                           fillColor: textfieldform,
                           border: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(width: 1, color: Colors.white70),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ), 
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(width: 1, color: Colors.white70),
                             borderRadius: BorderRadius.circular(10.0),
@@ -214,6 +235,10 @@ color: Colors.grey[500],
                           filled: true,
                           fillColor: textfieldform,
                           border: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(width: 1, color: Colors.white70),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ) ,
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(width: 1, color: Colors.white70),
                             borderRadius: BorderRadius.circular(10.0),
@@ -253,6 +278,10 @@ color: Colors.grey[500],
                           fillColor: textfieldform,
 
                           border: InputBorder.none,
+                          focusedBorder:OutlineInputBorder(
+                            borderSide: const BorderSide(width: 1, color: Colors.white70),
+                            borderRadius: BorderRadius.circular(10.0),
+                          ) ,
                           enabledBorder: OutlineInputBorder(
                             borderSide: const BorderSide(width: 1, color: Colors.white70),
                             borderRadius: BorderRadius.circular(10.0),
@@ -293,6 +322,10 @@ color: Colors.grey[500],
                               filled: true,
                               fillColor:textfieldform,
                               border: InputBorder.none,
+                              focusedBorder:OutlineInputBorder(
+                                borderSide: BorderSide(width: 1, color: background),
+                                borderRadius: BorderRadius.circular(10.0),
+                              ) ,
                               enabledBorder: OutlineInputBorder(
                                 borderSide: BorderSide(width: 1, color: background),
                                 borderRadius: BorderRadius.circular(10.0),
@@ -327,6 +360,10 @@ color: Colors.grey[500],
                                     filled: true,
                                     fillColor: textfieldform,
                                     border: InputBorder.none,
+                                    focusedBorder:OutlineInputBorder(
+                                      borderSide: BorderSide(width: 1, color: background),
+                                      borderRadius: BorderRadius.circular(10.0),
+                                    ) ,
                                     enabledBorder: OutlineInputBorder(
                                       borderSide: BorderSide(width: 1, color: background),
                                       borderRadius: BorderRadius.circular(10.0),

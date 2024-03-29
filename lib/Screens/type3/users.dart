@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:qhance_uiii/Screens/page2.dart';
+import 'package:qhance_uiii/Screens/type3/zones3.dart';
 import 'package:qhance_uiii/controllers/api/get_user_controller.dart';
 import 'package:qhance_uiii/controllers/api/login_controller.dart';
 import 'package:qhance_uiii/main.dart';
@@ -13,9 +13,9 @@ import 'package:qhance_uiii/widgets/container_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qhance_uiii/widgets/primary_container_widget.dart';
 
-import '../controllers/api/get_zone_controller.dart';
-import '../helper/colors.dart';
-import '../utils/shared_data.dart';
+import '../../controllers/api/get_zone_controller.dart';
+import '../../helper/colors.dart';
+import '../../utils/shared_data.dart';
 
 class page7 extends StatelessWidget {
   page7({super.key});

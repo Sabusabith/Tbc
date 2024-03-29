@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:qhance_uiii/Screens/page6.dart';
+import 'package:qhance_uiii/Screens/type2/item_screen.dart';
 import 'package:qhance_uiii/controllers/api/additem_controller.dart';
 import 'package:qhance_uiii/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qhance_uiii/utils/toast.dart';
 
-import '../helper/colors.dart';
+import '../../helper/colors.dart';
 
 class page5 extends StatefulWidget {
   const page5({super.key});

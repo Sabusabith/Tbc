@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
-import 'package:qhance_uiii/Screens/page5.dart';
-import '../controllers/api/get_phc_detail_controller.dart';
-import '../helper/colors.dart';
+import 'package:qhance_uiii/Screens/type3/additem.dart';
+import '../../controllers/api/get_phc_detail_controller.dart';
+import '../../helper/colors.dart';
 
 class page8 extends StatelessWidget {
  page8({Key? key}) : super(key: key);

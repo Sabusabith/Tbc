@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:qhance_uiii/Screens/login.dart';
-import 'package:qhance_uiii/Screens/page7.dart';
+import 'package:qhance_uiii/Screens/type3/users.dart';
 import 'package:qhance_uiii/controllers/api/get_user_controller.dart';
 import 'package:qhance_uiii/controllers/api/login_controller.dart';
 import 'package:qhance_uiii/utils/shared_data.dart';

@@ -2,9 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:qhance_uiii/Screens/splash.dart';
+import 'package:qhance_uiii/Screens/type2/domins.dart';
 import 'package:qhance_uiii/controllers/api/login_controller.dart';
 import 'package:qhance_uiii/controllers/api/splash_controller.dart';
 import 'package:qhance_uiii/controllers/api/get_user_controller.dart';
+
+import 'Screens/type2/zone2.dart';
+import 'Screens/type2/adduser.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();

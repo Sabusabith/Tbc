@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:qhance_uiii/Screens/page7.dart';
+import 'package:get/get.dart';
+import 'package:qhance_uiii/Screens/type3/additem.dart';
+import 'package:qhance_uiii/Screens/type3/users.dart';
 import 'package:qhance_uiii/main.dart';
 
-import '../helper/colors.dart';
+import '../../helper/colors.dart';
 
 class page6 extends StatefulWidget {
   const page6({super.key});
@@ -35,17 +37,16 @@ class _page6State extends State<page6> {
             style: TextStyle(color: Colors.white),
           ),
           actions: [
-            Row(
-              children: [
-                const Icon(
-                  Icons.login_sharp,
-                  color: Colors.white,
-                ),
-                SizedBox(
-                  width: ScreenUtil().setWidth(15),
-                )
-              ],
-            ),
+           Row(
+                children: [
+                 GestureDetector(onTap: (){
+                  Get.to(page5());
+                 },child: Image.asset('assets/go.png',height: 25,)),
+                  SizedBox(
+                    width: ScreenUtil().setWidth(13),
+                  )
+                ],
+              ),
           ],
         ),
         backgroundColor: background,
@@ -64,13 +65,22 @@ class _page6State extends State<page6> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: SizedBox(
-                    height: ScreenUtil().setHeight(78),
+                   
                     width: ScreenUtil().setWidth(335),
                     child: TextFormField(
+                      maxLines: 3,
                       decoration: InputDecoration(
                         filled: true,
+                        
                         fillColor: textfieldform,
                         border: InputBorder.none,
+                        focusedBorder:  OutlineInputBorder(
+                          
+                          borderSide:
+                              const BorderSide(width: 1, color: Colors.white
+                              ),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
                         enabledBorder: OutlineInputBorder(
                           borderSide:
                               const BorderSide(width: 1, color: Colors.white
@@ -78,7 +88,7 @@ class _page6State extends State<page6> {
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         contentPadding:
-                            const EdgeInsets.symmetric(horizontal: 10, vertical: 55),
+                            const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
                         hintText: "Completion of patients' health records in HIS, Wasfaty program……etc",
                         hintStyle: TextStyle(
                           color: Colors.grey[400],
@@ -117,21 +127,27 @@ class _page6State extends State<page6> {
                     borderRadius: BorderRadius.circular(10.0),
                   ),
                   child: SizedBox(
-                    height: ScreenUtil().setHeight(138),
+                   
                     width: ScreenUtil().setWidth(335),
                     child: TextFormField(
+                      maxLines: 7,
                       decoration: InputDecoration(
                         filled: true,
                         fillColor: textfieldform,
                         border: InputBorder.none,
+                        focusedBorder:OutlineInputBorder(
+                          borderSide:
+                          const BorderSide(width: 1, color: Colors.white),
+                          borderRadius: BorderRadius.circular(10.0),
+                        ) ,
                         enabledBorder: OutlineInputBorder(
                           borderSide:
                           const BorderSide(width: 1, color: Colors.white),
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         contentPadding:
-                        const EdgeInsets.symmetric(horizontal: 10,vertical: 110),
-                        hintText: "What evidence you need",
+                        const EdgeInsets.symmetric(horizontal: 10,vertical: 15),
+                        hintText: "What evidence you need?",
 
                         hintStyle: TextStyle(
                           color: Colors.grey[400],
@@ -145,7 +161,7 @@ class _page6State extends State<page6> {
                 ),
               ),
               SizedBox(
-                height: ScreenUtil().setHeight(300),
+                height: ScreenUtil().setHeight(90),
               ),
               SizedBox(
                 height: ScreenUtil().setHeight(59),
