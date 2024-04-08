@@ -1,21 +1,21 @@
 // To parse this JSON data, do
 //
-//     final addItemModel = addItemModelFromJson(jsonString);
+//     final updateTaskprogressionModel = updateTaskprogressionModelFromJson(jsonString);
 
 import 'dart:convert';
 
-AddItemModel addItemModelFromJson(String str) => AddItemModel.fromJson(json.decode(str));
+UpdateTaskprogressionModel updateTaskprogressionModelFromJson(String str) => UpdateTaskprogressionModel.fromJson(json.decode(str));
 
-String addItemModelToJson(AddItemModel data) => json.encode(data.toJson());
+String updateTaskprogressionModelToJson(UpdateTaskprogressionModel data) => json.encode(data.toJson());
 
-class AddItemModel {
+class UpdateTaskprogressionModel {
     SuccessResponse successResponse;
 
-    AddItemModel({
+    UpdateTaskprogressionModel({
         required this.successResponse,
     });
 
-    factory AddItemModel.fromJson(Map<String, dynamic> json) => AddItemModel(
+    factory UpdateTaskprogressionModel.fromJson(Map<String, dynamic> json) => UpdateTaskprogressionModel(
         successResponse: SuccessResponse.fromJson(json["SuccessResponse"]),
     );
 
@@ -25,29 +25,29 @@ class AddItemModel {
 }
 
 class SuccessResponse {
-    bool? statusCode;
-    int? resposeCode;
-    String? taskId;
-    String? message;
+    bool statusCode;
+    int resposeCode;
+    String progressionId;
+    String message;
 
     SuccessResponse({
         required this.statusCode,
         required this.resposeCode,
-        required this.taskId,
+        required this.progressionId,
         required this.message,
     });
 
     factory SuccessResponse.fromJson(Map<String, dynamic> json) => SuccessResponse(
         statusCode: json["statusCode"],
         resposeCode: json["resposeCode"],
-        taskId: json["taskId"],
+        progressionId: json["progressionId"],
         message: json["message"],
     );
 
     Map<String, dynamic> toJson() => {
         "statusCode": statusCode,
         "resposeCode": resposeCode,
-        "taskId": taskId,
+        "progressionId": progressionId,
         "message": message,
     };
 }

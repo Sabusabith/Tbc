@@ -10,12 +10,12 @@ import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:qhance_uiii/Screens/type3/users.dart';
 import 'package:qhance_uiii/controllers/api/login_controller.dart';
-import 'package:qhance_uiii/model/get_users_model.dart';
+import 'package:qhance_uiii/model/type3/get_users_model.dart';
 import 'package:qhance_uiii/utils/api_configs.dart';
 import 'package:qhance_uiii/utils/api_provider.dart';
 import 'package:qhance_uiii/utils/shared_data.dart';
 
-import '../../utils/toast.dart';
+import '../../../utils/toast.dart';
 
 class GetUserssController extends GetxController{
   
@@ -54,7 +54,7 @@ getUsersFromApi(phc)async{
 usersModel = GetUsersModel.fromJson(response.data);
 print('userDetails : ${usersModel?.successResponse.data[0].zoneId}}');
 
-await Get.to(page7());
+await Get.to(Users());
  }else{
  
  Get.snackbar("Oooops...", "server down..!");

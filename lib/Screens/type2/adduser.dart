@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:qhance_uiii/Screens/type2/domins.dart';
-import 'package:qhance_uiii/Screens/type3/additem.dart';
+import 'package:qhance_uiii/Screens/type3/activityProgression.dart';
 import 'package:qhance_uiii/helper/colors.dart';
 import 'package:qhance_uiii/main.dart';
 import 'package:qhance_uiii/widgets/textfield_widget.dart';
@@ -315,13 +315,16 @@ color: Colors.grey[500],
                           borderRadius: BorderRadius.circular(10.0),
                         ),
                         child: SizedBox(
-                          height: ScreenUtil().setHeight(57),
+                        
                           width: ScreenUtil().setWidth(60),
                           child:  TextFormField(
+                            controller: TextEditingController(text: "+966"),
                             decoration: InputDecoration(
                               filled: true,
+                              enabled: false,
                               fillColor:textfieldform,
                               border: InputBorder.none,
+
                               focusedBorder:OutlineInputBorder(
                                 borderSide: BorderSide(width: 1, color: background),
                                 borderRadius: BorderRadius.circular(10.0),
@@ -330,15 +333,10 @@ color: Colors.grey[500],
                                 borderSide: BorderSide(width: 1, color: background),
                                 borderRadius: BorderRadius.circular(10.0),
                               ),
-                              contentPadding: const EdgeInsets.symmetric(horizontal: 13, vertical: 25),
-                              hintText: "+91",
-                              hintStyle: TextStyle(
-
-                                color: Colors.grey[500],
-                                fontSize: 14,
-                                fontWeight: FontWeight.w400,
-                              ),
+                              contentPadding: const EdgeInsets.symmetric(horizontal: 13,),
+                    
                             ),
+                            
                             style: const TextStyle(color: Colors.black87),
 
                           ) ,
@@ -356,6 +354,7 @@ color: Colors.grey[500],
                                 height: ScreenUtil().setHeight(57),
                                 width: ScreenUtil().setWidth(260),
                                 child:  TextFormField(
+                                  keyboardType: TextInputType.number,
                                   decoration: InputDecoration(
                                     filled: true,
                                     fillColor: textfieldform,
@@ -370,6 +369,7 @@ color: Colors.grey[500],
                                     ),
                                     contentPadding: const EdgeInsets.symmetric(horizontal: 13, vertical: 25),
                                     hintText: "Enter Mobile Number",
+                                    
                                     hintStyle: TextStyle(
 
                                       color: Colors.grey[500],
@@ -405,8 +405,7 @@ color: Colors.grey[500],
 
                       ),
                       onPressed: () {
-                        Navigator.push(
-                            context, MaterialPageRoute(builder: (context) => const page5()));
+                      
                       },
                       child: const Text(
                         "Register", style: TextStyle(color: Colors.white),)),

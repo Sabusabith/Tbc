@@ -58,8 +58,8 @@ class Datum {
     int? status;
     DateTime createdAt;
     DateTime updatedAt;
-    PhcDetail? zone;
-    PhcDetail? phcDetail;
+    Zone zone;
+    PhcDetail phcDetail;
     List<UserDetail> userDetail;
 
     Datum({
@@ -87,7 +87,7 @@ class Datum {
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        zone: PhcDetail.fromJson(json["zone"]),
+        zone: Zone.fromJson(json["zone"]),
         phcDetail: PhcDetail.fromJson(json["phc_detail"]),
         userDetail: List<UserDetail>.from(json["user_detail"].map((x) => UserDetail.fromJson(x))),
     );
@@ -102,8 +102,8 @@ class Datum {
         "status": status,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "zone": zone!.toJson(),
-        "phc_detail": phcDetail!.toJson(),
+        "zone": zone.toJson(),
+        "phc_detail": phcDetail.toJson(),
         "user_detail": List<dynamic>.from(userDetail.map((x) => x.toJson())),
     };
 }
@@ -117,18 +117,18 @@ class PhcDetail {
     int? status;
     DateTime createdAt;
     DateTime updatedAt;
-    String? zoneName;
+    List<PhcDomainDetail>? phcDomainDetail;
 
     PhcDetail({
         required this.id,
-        this.zoneId,
+        required this.zoneId,
         required this.createdById,
-        this.phcName,
+        required this.phcName,
         required this.remarks,
         required this.status,
         required this.createdAt,
         required this.updatedAt,
-        this.zoneName,
+        required this.phcDomainDetail,
     });
 
     factory PhcDetail.fromJson(Map<String, dynamic> json) => PhcDetail(
@@ -140,7 +140,7 @@ class PhcDetail {
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
-        zoneName: json["zone_name"],
+        phcDomainDetail: List<PhcDomainDetail>.from(json["phc_domain_detail"].map((x) => PhcDomainDetail.fromJson(x))),
     );
 
     Map<String, dynamic> toJson() => {
@@ -148,6 +148,98 @@ class PhcDetail {
         "zone_id": zoneId,
         "created_by_id": createdById,
         "phc_name": phcName,
+        "remarks": remarks,
+        "status": status,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "phc_domain_detail": List<dynamic>.from(phcDomainDetail!.map((x) => x.toJson())),
+    };
+}
+
+class PhcDomainDetail {
+    String? id;
+    String? phcDetailId;
+    String? domainId;
+    String? remarks;
+    String? createdById;
+    int? status;
+    DateTime createdAt;
+    DateTime updatedAt;
+    Zone domain;
+
+    PhcDomainDetail({
+        required this.id,
+        required this.phcDetailId,
+        required this.domainId,
+        required this.remarks,
+        required this.createdById,
+        required this.status,
+        required this.createdAt,
+        required this.updatedAt,
+        required this.domain,
+    });
+
+    factory PhcDomainDetail.fromJson(Map<String, dynamic> json) => PhcDomainDetail(
+        id: json["id"],
+        phcDetailId: json["phc_detail_id"],
+        domainId: json["domain_id"],
+        remarks: json["remarks"],
+        createdById: json["created_by_id"],
+        status: json["status"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        domain: Zone.fromJson(json["domain"]),
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "phc_detail_id": phcDetailId,
+        "domain_id": domainId,
+        "remarks": remarks,
+        "created_by_id": createdById,
+        "status": status,
+        "created_at": createdAt.toIso8601String(),
+        "updated_at": updatedAt.toIso8601String(),
+        "domain": domain.toJson(),
+    };
+}
+
+class Zone {
+    String? id;
+    String? createdById;
+    String? domainName;
+    String? remarks;
+    int? status;
+    DateTime createdAt;
+    DateTime updatedAt;
+    String? zoneName;
+
+    Zone({
+        required this.id,
+        required this.createdById,
+        this.domainName,
+        required this.remarks,
+        required this.status,
+        required this.createdAt,
+        required this.updatedAt,
+        this.zoneName,
+    });
+
+    factory Zone.fromJson(Map<String, dynamic> json) => Zone(
+        id: json["id"],
+        createdById: json["created_by_id"],
+        domainName: json["domain_name"],
+        remarks: json["remarks"],
+        status: json["status"],
+        createdAt: DateTime.parse(json["created_at"]),
+        updatedAt: DateTime.parse(json["updated_at"]),
+        zoneName: json["zone_name"],
+    );
+
+    Map<String, dynamic> toJson() => {
+        "id": id,
+        "created_by_id": createdById,
+        "domain_name": domainName,
         "remarks": remarks,
         "status": status,
         "created_at": createdAt.toIso8601String(),
@@ -167,9 +259,9 @@ class UserDetail {
     String? remarks;
     DateTime createdAt;
     DateTime updatedAt;
-    User? user;
-    Role? role;
-    Role? specialization;
+    User user;
+    Role role;
+    Role specialization;
 
     UserDetail({
         required this.id,
@@ -214,9 +306,9 @@ class UserDetail {
         "remarks": remarks,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "user": user!.toJson(),
-        "role": role!.toJson(),
-        "specialization": specialization!.toJson(),
+        "user": user.toJson(),
+        "role": role.toJson(),
+        "specialization": specialization.toJson(),
     };
 }
 

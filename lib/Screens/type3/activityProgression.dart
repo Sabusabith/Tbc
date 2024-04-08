@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:qhance_uiii/Screens/type2/item_screen.dart';
-import 'package:qhance_uiii/controllers/api/additem_controller.dart';
+import 'package:qhance_uiii/Screens/type3/activitieswithActionplan.dart';
+import 'package:qhance_uiii/controllers/api/type3/UpdateActivityProgression_controller.dart';
+import 'package:qhance_uiii/controllers/api/type3/getActionPlan_controller.dart';
 import 'package:qhance_uiii/main.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,56 +12,63 @@ import 'package:qhance_uiii/utils/toast.dart';
 
 import '../../helper/colors.dart';
 
-class page5 extends StatefulWidget {
-  const page5({super.key});
+class ActivityProgression extends StatefulWidget {
+ ActivityProgression({super.key,required this.taskid,required this.phcid,required this.taskname,required this.evidence});
+var taskid ;
+var phcid;
+var taskname;
+var evidence;
 
   @override
-  State<page5> createState() => _page5State();
+  
+  State<ActivityProgression> createState() => _ActivityProgressionState();
 }
 
-class _page5State extends State<page5> {
- 
-AdditemController controller = Get.put(AdditemController());
-
-  final taskcontroller = TextEditingController();
+class _ActivityProgressionState extends State<ActivityProgression> {
+  
+   final taskcontroller = TextEditingController();
   final evidenccecontroller = TextEditingController();
+ItemController controller = Get.put(ItemController());
+GetActionPlanController actionPlanController = Get.put(GetActionPlanController());
+
 
   int _radiobutton = 1;
   int _unselect = 1;
   int selectedindex = 1;
 
 passData() {
+   print("phc details id : ${widget.phcid}");
+      print("task detail id : ${widget.taskid}");
   // Check if any of the fields are empty
-  if (taskcontroller.text.isEmpty ||
-      evidenccecontroller.text.isEmpty ||
+  if (
       selectedindex == null ||
       _radiobutton == null ||
       _unselect == null) {
     // Show an error message indicating that all fields are required
 
     customSnackBar('Please fill in all fields', 'Please fill in all fields', context,isError: true);
-    // ScaffoldMessenger.of(context).showSnackBar(
-
-    //   SnackBar(
-    //     content: Text('Please fill in all fields'),
-    //     backgroundColor: Colors.red,
-    //   ),
-    // );
+  
     return; // Exit the method if any field is empty
   }
 
   // If all fields are filled, proceed with adding the data
   Map pass = {
-    'task_name': taskcontroller.text,
-    'evidence_of_compliance': evidenccecontroller.text,
-    'per_visit': selectedindex,
-    'staff_availability': _radiobutton,
-    'awareness_trained': _unselect,
-    'remarks': 'dfd'
+   'task_detail_id':widget.taskid,
+   'phc_detail_id':widget.phcid,
+   'per_visit':selectedindex,
+   'staff_availability':_radiobutton,
+   'awareness_trained':_unselect,
+   'remarks':'tftf'
   };
-  controller.addItem(pass, context);
+ controller.addItem(pass, context,);
 }
 
+@override
+  void initState() {
+    super.initState();
+    taskcontroller.text = widget.taskname;
+    evidenccecontroller.text = widget.evidence;
+  }
 
 
   @override
@@ -79,10 +89,24 @@ passData() {
           },
         ),
         title: Text(
-          "Add Item",
+          "Activity Progression",
           style: GoogleFonts.inter(
               fontSize: 19, color: Colors.white, fontWeight: FontWeight.w600),
         ),
+        actions: [
+           GestureDetector(
+            onTap: (){
+              actionPlanController.getActionplan(widget.phcid);
+              Get.to(ActivitiesWithActionPlan());
+            },
+             child: Row(
+                    children: [
+                  Image.asset('assets/go.png',height: 25,),
+                      SizedBox(width: ScreenUtil().setWidth(10))
+                    ],
+                  ),
+           )
+        ],
      
       ),
       backgroundColor: background,

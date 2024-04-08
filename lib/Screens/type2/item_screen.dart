@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
-import 'package:qhance_uiii/Screens/type3/additem.dart';
+import 'package:qhance_uiii/Screens/type3/activityProgression.dart';
 import 'package:qhance_uiii/Screens/type3/users.dart';
 import 'package:qhance_uiii/main.dart';
 
@@ -40,7 +40,7 @@ class _page6State extends State<page6> {
            Row(
                 children: [
                  GestureDetector(onTap: (){
-                  Get.to(page5());
+                
                  },child: Image.asset('assets/go.png',height: 25,)),
                   SizedBox(
                     width: ScreenUtil().setWidth(13),
@@ -177,7 +177,7 @@ class _page6State extends State<page6> {
                     ),
                     onPressed: () {
                       Navigator.push(
-                          context, MaterialPageRoute(builder: (context) =>  page7()));
+                          context, MaterialPageRoute(builder: (context) =>  Users()));
                     },
                     child: const Text(
                       "Send", style: TextStyle(color: Colors.white),)),

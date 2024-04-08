@@ -5,7 +5,7 @@ import 'package:get/get_instance/get_instance.dart';
 import 'package:get/get_navigation/src/extension_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:qhance_uiii/Screens/type3/users.dart';
-import 'package:qhance_uiii/controllers/api/get_user_controller.dart';
+import 'package:qhance_uiii/controllers/api/type3/get_user_controller.dart';
 import 'package:qhance_uiii/model/login_model.dart';
 import 'package:qhance_uiii/utils/api_configs.dart';
 import 'package:qhance_uiii/utils/api_provider.dart';
@@ -35,11 +35,13 @@ class LoginController extends GetxController {
         LoginModel loginModel = LoginModel.fromJson(response.data);
         saveObject("token", loginModel.apiToken);
            
-           saveObject("phc", loginModel.message.userDetail[0].phcTbcCodeId);
+           saveObject("phc", loginModel.message.userDetail?[0].phcTbcCodeId);
            print('login token :${loginModel.apiToken}');
         authid = loginModel.message.id;
+        saveObject("phcdetailid", loginModel.message.userDetail?[0]);
          saveObject("id", authid);
-        phcTbccode = loginModel.message.userDetail[0].phcTbcCodeId;
+
+        phcTbccode = loginModel.message.userDetail?[0].phcTbcCodeId;
        apitoken =  loginModel.apiToken;
          customSnackBar("Login success", "Login success", context,
             isError: false);
@@ -49,7 +51,7 @@ class LoginController extends GetxController {
          
       
      // Call GetUsersController after successful login
-        Get.to(page7());
+        Get.to(Users());
 
       } else if (response.statusCode == 200 &&
           response.data["success"] == false) {

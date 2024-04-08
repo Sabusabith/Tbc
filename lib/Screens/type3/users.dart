@@ -4,8 +4,9 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
-import 'package:qhance_uiii/Screens/type3/zones3.dart';
-import 'package:qhance_uiii/controllers/api/get_user_controller.dart';
+import 'package:qhance_uiii/Screens/type3/domains3.dart';
+import 'package:qhance_uiii/controllers/api/type3/get_Domain_fromPHc_controller.dart';
+import 'package:qhance_uiii/controllers/api/type3/get_user_controller.dart';
 import 'package:qhance_uiii/controllers/api/login_controller.dart';
 import 'package:qhance_uiii/main.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,16 +14,14 @@ import 'package:qhance_uiii/widgets/container_widget.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qhance_uiii/widgets/primary_container_widget.dart';
 
-import '../../controllers/api/get_zone_controller.dart';
 import '../../helper/colors.dart';
 import '../../utils/shared_data.dart';
 
-class page7 extends StatelessWidget {
-  page7({super.key});
-  GetZoneController controller = Get.put(GetZoneController());
+class Users extends StatelessWidget {
+  Users({super.key});
   GetUserssController userController = Get.put(GetUserssController());
     DateTime? currentBackPressTime; // Declare currentBackPressTime variable
-
+GetDomainFromPHCcontroller ccontroller = Get.put(GetDomainFromPHCcontroller());
   @override
   Widget build(BuildContext context) {
 
@@ -50,9 +49,10 @@ class page7 extends StatelessWidget {
             actions: [
               IconButton(
                 onPressed: () async {
-                  controller.getZones();
+                  var phcdetailid = await getSavedObject("phcdetailid");
+            ccontroller.getDomains(phcdetailid);
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => page2()));
+                      MaterialPageRoute(builder: (context) => Domains3()));
                 },
                 icon:  Image.asset('assets/go.png',height: 25,),
               )
@@ -70,13 +70,13 @@ class page7 extends StatelessWidget {
                           SizedBox(width: ScreenUtil().setWidth(15)),
                           customcontainer(
                             text3: "care code",
-                            text4: userController.usersModel!.successResponse
+                            text4: userController.usersModel?.successResponse
                                 .data[0].tbcCode
-                                .toString(),
+                                .toString()??'No Code',
                             borderRadius: ScreenUtil().setWidth(13),
                             Bordercolor: Colors.black,
-                            text: userController.usersModel!.successResponse
-                                    .data[0].zone?.zoneName
+                            text: userController.usersModel?.successResponse
+                                    .data[0].zone.zoneName
                                     .toString() ??
                                 'No Data',
                             text1: "Primary Health Care Name",
@@ -216,10 +216,10 @@ class page7 extends StatelessWidget {
                                           ),
                                           Text(
                                             userController
-                                                    .usersModel!.successResponse
+                                                    .usersModel?.successResponse
                                                     .data[0]
                                                     .userDetail[index]
-                                                    .role?.roleName
+                                                    .role.roleName
                                                     .toString() ??
                                                 'No Roll',
                                             style: TextStyle(

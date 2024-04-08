@@ -43,7 +43,7 @@ class Message {
     dynamic emailVerifiedAt;
     DateTime createdAt;
     DateTime updatedAt;
-    List<UserDetail> userDetail;
+    List<UserDetail>? userDetail;
 
     Message({
         required this.id,
@@ -84,7 +84,7 @@ class Message {
         "email_verified_at": emailVerifiedAt,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),
-        "user_detail": List<dynamic>.from(userDetail.map((x) => x.toJson())),
+        "user_detail": List<dynamic>.from(userDetail!.map((x) => x.toJson())),
     };
 }
 
@@ -139,54 +139,3 @@ class UserDetail {
         "updated_at": updatedAt.toIso8601String(),
     };
 }
-
-
-
-// import 'package:get/get.dart';
-// import 'package:get/get_core/src/get_main.dart';
-// import 'package:get/get_state_manager/get_state_manager.dart';
-// import 'package:qhance_uiii/Screens/page7.dart';
-// import 'package:qhance_uiii/utils/shared_data.dart';
-
-// import '../../Screens/login.dart';
-// import 'get_user_controller.dart';
-// import 'login_controller.dart';
-
-// class SplashController extends GetxController {
-//   GetUserssController userssController = Get.put(GetUserssController());
-//   LoginController loginController = Get.put(LoginController());
-
-//   @override
-//   void onInit() {
-//     super.onInit();
-//     checkUserToken();
-//   }
-
-//   void checkUserToken() async {
-//     var newToken = await loginController.apitoken;
-//     var storedToken = await getSavedObject('token');
-//     var phc = await getSavedObject('phc');
-//     print("Stored token : $storedToken, New token : $newToken");
-    
-//     if (storedToken != null && storedToken == newToken) {
-//       // Token exists and is the same as the new token
-//       // Navigate to page7
-//       userssController.getUsersFromApi(phc);
-//       Get.offAll(() => page7());
-//     } else if (storedToken != null && storedToken != newToken) {
-//       // New token is different from the stored token
-//       // Clear existing token and navigate to login
-//       clearSavedObject('token');
-//       clearSavedObject('phc');
-//       Get.offAll(() => login());
-//     }else if(storedToken != null){
-//    userssController.getUsersFromApi(phc);
-//       Get.offAll(() => page7());
-//     }
-    
-//      else {
-//       // No token found, navigate to login
-//       Get.offAll(() => login());
-//     }
-//   }
-// }

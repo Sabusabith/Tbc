@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:qhance_uiii/Screens/type2/item_screen.dart';
 import 'package:qhance_uiii/Screens/type3/activities.dart';
-import 'package:qhance_uiii/Screens/type3/zones3.dart';
+import 'package:qhance_uiii/Screens/type3/domains3.dart';
 import 'package:qhance_uiii/Screens/type2/zone2.dart';
 
 
@@ -66,59 +66,56 @@ class _page1State extends State<page1> {
                 child: Padding(
                   padding: const EdgeInsets.only(top: 20,right: 20,left: 20),
                   child: GridView.builder(
-                                     gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                                      childAspectRatio: 1,
-                                          crossAxisCount: 2, // Number of columns
-                                          crossAxisSpacing: 20.0, // Spacing between columns
-                                          mainAxisSpacing: 20.0, // Spacing between rows
-                                        ),
-                                    itemCount:zonename.length,
-                                    itemBuilder: (context, index) => InkWell(
-                                      onTap: (){
-                                    
-                                        Get.to(page8());
-                                    
-                                      },
-                                      child: Container(
-                                        width: ScreenUtil().setWidth(143.23),
-                                        height: ScreenUtil().setHeight(143.23),
-                                        decoration: BoxDecoration(
-                                          border: Border.all(
-                                              color: myColor, width: ScreenUtil().setWidth(1.5)),
-                                          borderRadius:
-                                              BorderRadius.circular(ScreenUtil().setWidth(15)),
-                                          boxShadow: [
-                                            BoxShadow(
-                                              color: const Color.fromRGBO(0, 0, 0, 0.25),
-                                              offset: Offset(0, ScreenUtil().setHeight(4)),
-                                              blurRadius: ScreenUtil().setHeight(2),
-                                            ),
-                                          ],
-                                          color: Colors.white,
-                                        ),
-                                        child: Center(
-                                          child: Padding(
-                                            padding: const EdgeInsets.symmetric(horizontal: 15),
-                                            child: Text(
-                                              zonename[index].toString(),
-                                              textAlign: TextAlign.center,
-                                              style: TextStyle(
-                                                
-                                                color: myColor,
-                                                fontFamily: 'Inter',
-                                                fontSize: 18,
-                                                letterSpacing: 1,
-                                                fontWeight: FontWeight.bold,
-                                                height: ScreenUtil().setHeight(1),
-                                              ),
-                                              
-                                            ),
-                                          ),
-                                         
-                                        ),
-                                      ),
-                                    ),
-                                  ),
+  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+    childAspectRatio: 1,
+    crossAxisCount: 2, // Number of columns
+    crossAxisSpacing: 20.0, // Spacing between columns
+    mainAxisSpacing: 20.0, // Spacing between rows
+  ),
+  itemCount: zonename.length,
+  itemBuilder: (context, index) => InkWell(
+    onTap: () {
+
+    },
+    child: Container(
+      width: ScreenUtil().setWidth(200), // Fixed width
+      height: ScreenUtil().setHeight(200), // Fixed height
+      decoration: BoxDecoration(
+        border: Border.all(
+          color: myColor,
+          width: ScreenUtil().setWidth(1.5),
+        ),
+        borderRadius: BorderRadius.circular(ScreenUtil().setWidth(15)),
+        boxShadow: [
+          BoxShadow(
+            color: const Color.fromRGBO(0, 0, 0, 0.25),
+            offset: Offset(0, ScreenUtil().setHeight(4)),
+            blurRadius: ScreenUtil().setHeight(2),
+          ),
+        ],
+        color: Colors.white,
+      ),
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: Text(
+            zonename[index].toString(),
+            textAlign: TextAlign.center,
+            maxLines: 4,
+            style: TextStyle(
+              color: myColor,
+              fontFamily: 'Inter',
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              height: 1.5,
+            ),
+          ),
+        ),
+      ),
+    ),
+  ),
+),
+
                 ),
               ),
             ],
