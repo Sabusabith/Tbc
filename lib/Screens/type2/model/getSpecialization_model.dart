@@ -1,21 +1,21 @@
 // To parse this JSON data, do
 //
-//     final zoneModel = zoneModelFromJson(jsonString);
+//     final getSpecializationModel = getSpecializationModelFromJson(jsonString);
 
 import 'dart:convert';
 
-ZoneModel zoneModelFromJson(String str) => ZoneModel.fromJson(json.decode(str));
+GetSpecializationModel getSpecializationModelFromJson(String str) => GetSpecializationModel.fromJson(json.decode(str));
 
-String zoneModelToJson(ZoneModel data) => json.encode(data.toJson());
+String getSpecializationModelToJson(GetSpecializationModel data) => json.encode(data.toJson());
 
-class ZoneModel {
+class GetSpecializationModel {
     SuccessResponse successResponse;
 
-    ZoneModel({
+    GetSpecializationModel({
         required this.successResponse,
     });
 
-    factory ZoneModel.fromJson(Map<String, dynamic> json) => ZoneModel(
+    factory GetSpecializationModel.fromJson(Map<String, dynamic> json) => GetSpecializationModel(
         successResponse: SuccessResponse.fromJson(json["SuccessResponse"]),
     );
 
@@ -51,8 +51,7 @@ class SuccessResponse {
 class Datum {
     String? id;
     String? createdById;
-    String? zoneName;
-    String? remarks;
+    String? speciality;
     int? status;
     DateTime createdAt;
     DateTime updatedAt;
@@ -60,8 +59,7 @@ class Datum {
     Datum({
         required this.id,
         required this.createdById,
-        required this.zoneName,
-        required this.remarks,
+        required this.speciality,
         required this.status,
         required this.createdAt,
         required this.updatedAt,
@@ -70,8 +68,7 @@ class Datum {
     factory Datum.fromJson(Map<String, dynamic> json) => Datum(
         id: json["id"],
         createdById: json["created_by_id"],
-        zoneName: json["zone_name"],
-        remarks: json["remarks"],
+        speciality: json["speciality"],
         status: json["status"],
         createdAt: DateTime.parse(json["created_at"]),
         updatedAt: DateTime.parse(json["updated_at"]),
@@ -80,8 +77,7 @@ class Datum {
     Map<String, dynamic> toJson() => {
         "id": id,
         "created_by_id": createdById,
-        "zone_name": zoneName,
-        "remarks": remarks,
+        "speciality": speciality,
         "status": status,
         "created_at": createdAt.toIso8601String(),
         "updated_at": updatedAt.toIso8601String(),

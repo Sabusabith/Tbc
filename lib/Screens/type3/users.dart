@@ -5,8 +5,8 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:qhance_uiii/Screens/type3/domains3.dart';
-import 'package:qhance_uiii/controllers/api/type3/get_Domain_fromPHc_controller.dart';
-import 'package:qhance_uiii/controllers/api/type3/get_user_controller.dart';
+import 'package:qhance_uiii/Screens/type3/controller/get_Domain_fromPHc_controller.dart';
+import 'package:qhance_uiii/Screens/type3/controller/get_user_controller.dart';
 import 'package:qhance_uiii/controllers/api/login_controller.dart';
 import 'package:qhance_uiii/main.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -33,33 +33,34 @@ GetDomainFromPHCcontroller ccontroller = Get.put(GetDomainFromPHCcontroller());
         // You can customize this behavior as per your requirement
         return _onBackPressed(context);
       },
-      child: SafeArea(
-        child: Scaffold(
-          appBar: AppBar(
-            backgroundColor: myColor,
-            leading: SizedBox(),
-            title: Text(
-              "Primary Health Care",
-              style: GoogleFonts.poppins(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-                color: Colors.white,
-              ),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: myColor,
+          leading: SizedBox(),
+          leadingWidth: 20,
+          title: Text(
+            "Primary Health Care",
+            style: GoogleFonts.poppins(
+              fontSize: 18,
+              fontWeight: FontWeight.w600,
+              color: Colors.white,
             ),
-            actions: [
-              IconButton(
-                onPressed: () async {
-                  var phcdetailid = await getSavedObject("phcdetailid");
-            ccontroller.getDomains(phcdetailid);
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => Domains3()));
-                },
-                icon:  Image.asset('assets/go.png',height: 25,),
-              )
-            ],
           ),
-          backgroundColor: background,
-          body: Obx(() => userController.isloading.value
+          actions: [
+            IconButton(
+              onPressed: () async {
+                var phcdetailid = await getSavedObject("phcdetailid");
+          ccontroller.getDomains(phcdetailid);
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => Domains3()));
+              },
+              icon:  Image.asset('assets/go.png',height: 25,),
+            )
+          ],
+        ),
+        backgroundColor: background,
+        body: SafeArea(
+          child: Obx(() => userController.isloading.value
               ? Center(child: CircularProgressIndicator(color: Colors.green))
               : SingleChildScrollView(
                   child: Column(

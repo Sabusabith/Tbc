@@ -2,18 +2,18 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/state_manager.dart';
-import 'package:qhance_uiii/model/type3/updateTaskProgression_model.dart';
+import 'package:qhance_uiii/Screens/type3/model/updateTaskProgression_model.dart';
 import 'package:qhance_uiii/utils/api_provider.dart';
 import 'package:qhance_uiii/utils/shared_data.dart';
 
 import '../../../utils/toast.dart';
 
-class ItemController extends GetxController {
+class ItemController2 extends GetxController {
   addItem(Map data, context,) async {
     UpdateTaskprogressionModel? model;
 
     try {
-      var token = await getSavedObject('token');
+     var token = await getSavedObject('token');
       var url = 'https://tbc.d-note.com/api/addTaskProgression';
 
       FormData formData = FormData.fromMap({
@@ -45,7 +45,7 @@ class ItemController extends GetxController {
             content: Text(
               'Somthing Error!',
             ),
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.red,
           ),
         );
         print('status message : ${response.data['status']}');

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/get_rx/get_rx.dart';
-import 'package:qhance_uiii/model/type3/getActionPlan_model.dart';
+import 'package:qhance_uiii/Screens/type3/model/getActionPlan_model.dart';
 
 import '../../../utils/api_provider.dart';
 import '../../../utils/shared_data.dart';
@@ -40,4 +40,6 @@ throw Exception(e);
 }
 
 
-}}
+}
+}
+ 

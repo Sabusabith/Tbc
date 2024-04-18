@@ -4,25 +4,20 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:qhance_uiii/Screens/type2/model/getzones_model.dart';
 import 'package:qhance_uiii/Screens/type3/activityProgression.dart';
-import '../../controllers/api/type3/get_Domain_fromPHc_controller.dart';
+import 'package:qhance_uiii/Screens/type3/model/get_users_model.dart';
+import 'controller/get_Domain_fromPHc_controller.dart';
 import '../../helper/colors.dart';
+import 'model/getDomainFromPHC_model.dart';
 
 class Activities extends StatelessWidget {
   Activities(
-      {required this.start_date,
-      required this.end_date,
-      required this.activity_name,
-      required this.progress,
-      required this.phcid});
+      {required this.taskDetails,required this.phcdetailid});
   GetDomainFromPHCcontroller ccontroller =
       Get.put(GetDomainFromPHCcontroller());
-  DateTime start_date;
-  DateTime end_date;
-  var activity_name;
-  int progress;
-  var phcid;
-
+final List<TaskDetail>? taskDetails;
+var phcdetailid;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -51,8 +46,8 @@ class Activities extends StatelessWidget {
             height: size.height,
             child: Padding(
               padding: const EdgeInsets.only(top: 10),
-              child: ListView.builder(
-                itemCount: ccontroller.model?.successResponse.data?.length ?? 1,
+              child:taskDetails!.isNotEmpty? ListView.builder(
+                itemCount: taskDetails?.length??0,
                 itemBuilder: (context, index) {
                   return Column(
                     children: [
@@ -62,36 +57,18 @@ class Activities extends StatelessWidget {
                           SizedBox(width: 15),
                           GestureDetector(
                             onTap: () {
-                              String? taskid = ccontroller
-                                  .model
-                                  ?.successResponse
-                                  .data?[index]
-                                  .domain
-                                  .taskDetail?[0]
-                                  .id;
-                              String? tasname = ccontroller
-                                  .model
-                                  ?.successResponse
-                                  .data?[index]
-                                  .domain
-                                  .taskDetail?[0]
-                                  .taskName;
-                              String? evidence = ccontroller
-                                  .model
-                                  ?.successResponse
-                                  .data?[index]
-                                  .domain
-                                  .taskDetail?[0]
-                                  .evidenceOfCompliance;
+                            
+                           
+                           
 
                               Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                       builder: (context) => ActivityProgression(
-                                            taskid: taskid,
-                                            phcid: phcid,
-                                            taskname: tasname,
-                                            evidence: evidence,
+                                            taskid: taskDetails?[index].id??'0',
+                                            phcid: phcdetailid??'0',
+                                            taskname: taskDetails?[index].taskName??"Demo Task",
+                                            evidence: taskDetails?[index].evidenceOfCompliance??"No Data",
                                           )));
                             },
                             child: Container(
@@ -136,7 +113,7 @@ class Activities extends StatelessWidget {
                                             SizedBox(height: 5),
                                             Text(
                                               DateFormat('yyyy-MM-dd').format(
-                                                start_date,
+                                               taskDetails?[index].startDate??DateTime.now(),
                                               ),
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -155,7 +132,7 @@ class Activities extends StatelessWidget {
                                             SizedBox(height: 5),
                                             Text(
                                               DateFormat('yyyy-MM-dd').format(
-                                                end_date,
+                                               taskDetails?[index].endDate??DateTime.now(),
                                               ),
                                               style: TextStyle(
                                                 color: Colors.white,
@@ -179,7 +156,7 @@ class Activities extends StatelessWidget {
                                                 width: 200,
                                                 height: 80,
                                                 child: Text(
-                                                  activity_name,
+                                                 taskDetails?[index].taskName.toString()??"Demo Task",
                                                   style: TextStyle(
                                                     fontSize: 14.sp,
                                                     color: Colors.black,
@@ -208,7 +185,9 @@ class Activities extends StatelessWidget {
                                                       child:
                                                           CircularProgressIndicator(
                                                         strokeWidth: 5,
-                                                        value: 0.25,
+                                                        value:taskDetails?[index].score != null
+      ? taskDetails![index].score! / 100 // Assuming score is out of 100
+      : 0.0,
                                                         valueColor:
                                                             new AlwaysStoppedAnimation<
                                                                     Color>(
@@ -227,7 +206,7 @@ class Activities extends StatelessWidget {
                                                       right: 0,
                                                       top: 15,
                                                       child: Text(
-                                                        progress.toString(),
+                                                       taskDetails?[index].score.toString()??"Demo Task",
                                                         textAlign:
                                                             TextAlign.center,
                                                         style: TextStyle(
@@ -257,7 +236,7 @@ class Activities extends StatelessWidget {
                     ],
                   );
                 },
-              ),
+              ):Center(child: Text("No Tasks",style: TextStyle(color: Colors.grey.shade800),))
             )),
       ),
     );

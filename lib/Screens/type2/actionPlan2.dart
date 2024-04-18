@@ -2,14 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/route_manager.dart';
+import 'package:qhance_uiii/Screens/type2/actionPlan_update2.dart';
+import 'package:qhance_uiii/Screens/type2/controller/get_actionPlan2_controller.dart';
 import 'package:qhance_uiii/Screens/type3/action_plan_update.dart';
 import 'package:qhance_uiii/Screens/type3/controller/getActionPlan_controller.dart';
 
 import '../../helper/colors.dart';
 
-class ActivitiesWithActionPlan extends StatelessWidget {
-  ActivitiesWithActionPlan({super.key});
-GetActionPlanController controller = Get.put(GetActionPlanController());
+class ActivitiesWithActionPlan2 extends StatelessWidget {
+  ActivitiesWithActionPlan2({super.key});
+GetActionPlanController2 controller = Get.put(GetActionPlanController2());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -33,8 +35,20 @@ GetActionPlanController controller = Get.put(GetActionPlanController());
         body: SizedBox(
           width: size.width,
           height: size.height,
-          child:Obx(()=>
-             controller.isloading.value?Center(child: CircularProgressIndicator(color: myColor,)): controller.model?.successResponse.data != null? ListView.builder(
+          child:Obx((){
+            if (controller.isloading.value) {
+             return  Center(child: CircularProgressIndicator(color: myColor,));
+            } else {
+              if (controller.model?.successResponse.data?.isEmpty ?? true) {
+                return Center(
+                  child: Text(
+                    "No Action Plans",
+                    style: TextStyle(fontSize: 18,color: Colors.grey.shade800),
+                  ),
+                );
+              }else{
+              
+             return  ListView.builder(
               itemCount: controller.model?.successResponse.data?.length??0,
               itemBuilder: ((context, index) => Column(
                     children: [
@@ -80,7 +94,7 @@ GetActionPlanController controller = Get.put(GetActionPlanController());
                                   DateTime? enddate = enddateObject != null
                                 ? DateTime.parse(enddateObject.toString())
                                 : null;
-                                  Get.to(ActionPlanUpdate(coassigned: co_assign,task_name: task_name,assigned:assigned,days: days,details: details,start_date: startdate ?? DateTime.now(),end_date: enddate??DateTime.now(),),);
+                                  Get.to(ActionPlanUpdate2(coassigned: co_assign,task_name: task_name,assigned:assigned,days: days,details: details,start_date: startdate ?? DateTime.now(),end_date: enddate??DateTime.now(),),);
                                 },
                                   child: SizedBox(
                                     width: size.width,
@@ -146,8 +160,10 @@ GetActionPlanController controller = Get.put(GetActionPlanController());
                       )
                     ],
                   )),
-            ):Text("No Action Plan",style: TextStyle(color: Colors.grey.shade800),),
-          )
+            );}
+            }
+            
+   } )
         ));
   }
 }
