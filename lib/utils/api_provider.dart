@@ -15,6 +15,7 @@ class ApiProvider {
       if (error.response != null && error.response!.statusCode == 401) {
         // Clear token and navigate to login
         await clearSavedObject('token');
+          await clearSavedObject('type');
         await clearSavedObject('phc');
         Get.offAll(() => login());
       }
