@@ -4,6 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import 'package:qhance_uiii/Screens/type1/zones1.dart';
 
 import 'package:qhance_uiii/utils/shared_data.dart';
 import 'package:qhance_uiii/utils/toast.dart';
@@ -41,24 +42,34 @@ class LoginController extends GetxController {
         final dynamic messageData = responseData['message'];
         if (messageData is Map<String, dynamic>) {
           final String userType = messageData['user_type'];
-
-          if (userType == 'Type 2') {
+          if (userType == 'Type 1') {
             final LoginModel loginModel = LoginModel.fromJson(responseData);
             saveObject("token", loginModel.apiToken);
             saveObject('type', loginModel.message.userType);
-            customSnackBar("Login success", "Login success", context,isError: false);
+              customSnackBar("Login success", "Login success", context,
+                isError: false);
+                Get.to(Zones1());
+          } else if (userType == 'Type 2') {
+            final LoginModel loginModel = LoginModel.fromJson(responseData);
+            saveObject("token", loginModel.apiToken);
+            saveObject('type', loginModel.message.userType);
+            customSnackBar("Login success", "Login success", context,
+                isError: false);
             Get.to(Zones());
           } else if (userType == 'Type 3') {
             final LoginModel loginModel = LoginModel.fromJson(responseData);
             saveObject('type', loginModel.message.userType);
             saveObject("token", loginModel.apiToken);
-            saveObject("phc", loginModel.message.userDetail?.first.phcTbcCodeId);
+            saveObject(
+                "phc", loginModel.message.userDetail?.first.phcTbcCodeId);
             authId = loginModel.message.id;
-            saveObject("phcdetailid", loginModel.message.userDetail?.first.phcDetailId);
+            saveObject("phcdetailid",
+                loginModel.message.userDetail?.first.phcDetailId);
             saveObject("id", authId);
             phcTbcCode = loginModel.message.userDetail?.first.phcTbcCodeId;
             apiToken = loginModel.apiToken;
-            customSnackBar("Login success", "Login success", context,isError: false);
+            customSnackBar("Login success", "Login success", context,
+                isError: false);
             await controller.getUsersFromApi(phcTbcCode);
             Get.to(Users());
           } else {
@@ -68,12 +79,14 @@ class LoginController extends GetxController {
           customSnackBar("Login failed", "Invalid response format", context);
         }
       } else {
-        final String errorMessage = responseData["message"] ?? "Unknown error occurred";
+        final String errorMessage =
+            responseData["message"] ?? "Unknown error occurred";
         customSnackBar("Login failed", errorMessage, context);
       }
     } catch (e) {
       print("Exception occurred during login: $e");
-      customSnackBar("Login failed", "An error occurred. Please try again later.", context);
+      customSnackBar("Login failed",
+          "An error occurred. Please try again later.", context);
     }
   }
 }

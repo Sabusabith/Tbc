@@ -1,5 +1,6 @@
 import 'package:get/get.dart';
 import 'package:qhance_uiii/Screens/login.dart';
+import 'package:qhance_uiii/Screens/type1/zones1.dart';
 import 'package:qhance_uiii/Screens/type2/Zones_2.dart';
 import 'package:qhance_uiii/Screens/type3/users.dart';
 import 'package:qhance_uiii/Screens/type3/controller/get_Domain_fromPHc_controller.dart';
@@ -24,7 +25,12 @@ class SplashController extends GetxController {
      var phcDetail_id = await getSavedObject('phcdetailid');
     print("token : $token");
     print("User Type : $type");
-    if (token != null && type == 'Type 2') {
+
+
+if (token != null && type == 'Type 1') {
+  Get.to(Zones1());
+}
+   else if (token != null && type == 'Type 2') {
       Get.to(Zones());
 
     } else if(token != null && type  == 'Type 3'){
