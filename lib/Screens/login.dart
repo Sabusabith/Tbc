@@ -95,7 +95,7 @@ class login extends StatelessWidget {
               
                        
                       
-                        hintText: "Password",
+                        hintText: "Email",
                         hintStyle: TextStyle(
                           color: Colors.grey[400],
                           fontSize: 15,
@@ -161,6 +161,8 @@ class login extends StatelessWidget {
                       onPressed: () async {
                         FocusScope.of(context).requestFocus(FocusNode());
                         await _login(context);
+                        controller.emailController.clear();
+                        controller.passController.clear();
                       },
                       child: Text(
                         "Login",

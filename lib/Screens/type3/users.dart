@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
+import 'package:qhance_uiii/Screens/login.dart';
 import 'package:qhance_uiii/Screens/type3/domains3.dart';
 import 'package:qhance_uiii/Screens/type3/controller/get_Domain_fromPHc_controller.dart';
 import 'package:qhance_uiii/Screens/type3/controller/get_user_controller.dart';
@@ -55,7 +56,37 @@ GetDomainFromPHCcontroller ccontroller = Get.put(GetDomainFromPHCcontroller());
                     MaterialPageRoute(builder: (context) => Domains3()));
               },
               icon:  Image.asset('assets/go.png',height: 25,),
-            )
+            ),
+               InkWell(onTap: () {
+           showDialog(
+                  context: context,
+                  builder: (BuildContext context) {
+                    return AlertDialog(backgroundColor: Colors.white,
+                      title: Text("Logout",style: TextStyle(color: Colors.grey.shade800),),
+                      content: Text("Do you want to logout?",style: TextStyle(color: Colors.grey.shade800)),
+                      actions: [
+                        TextButton(
+                          onPressed: () {
+                            Navigator.of(context).pop(); // Close dialog
+                          },
+                          child: Text("Cancel",style: TextStyle(color: myColor),),
+                        ),
+                        TextButton(
+                          onPressed: ()async {
+                      await clearSavedObject('token');
+          await clearSavedObject('type');
+        await clearSavedObject('phc');
+                      Get.to(login());
+                          },
+                          child: Text("Logout",style: TextStyle(color: myColor)),
+                        ),
+                      ],
+                    );
+                  },
+                );
+           
+         },child: Icon(Icons.power_settings_new_outlined,color: Colors.white,size: 30,)),
+         SizedBox(width: 15,),
           ],
         ),
         backgroundColor: background,
