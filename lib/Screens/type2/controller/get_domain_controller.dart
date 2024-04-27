@@ -26,15 +26,17 @@ class GetDomainFromPHCcontroller2 extends GetxController {
     Map<String, String> queryParams = {
       'phc_detail_id': phcDetail_id.toString(),
     };
+
     var response =
-        await ApiProvider().get(url, token: token, queryParams: queryParams);
+        await ApiProvider().get(url, token: token,queryParams: queryParams );
+         print("Domain details response : ${response.data}");
     if (response.statusCode == 200 &&
         response.data["SuccessResponse"]['statusCode'] == true) {
     
 
       isloading(false);
       model = GetDomainFromPhcModel2.fromJson(response.data);
-                print("Domain details : ${model?.successResponse.data?[0].domain.domainName}");
+                print("Domain details : ${model?.successResponse?.data?[0].domain?.domainName}");
     } else {
       Get.snackbar("No Available Domains", '');
     }

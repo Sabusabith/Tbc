@@ -1,9 +1,9 @@
-class GetDomainFromPhcModel2 {
+class GetDomainFromPhcModel1 {
   SuccessResponse? successResponse;
 
-  GetDomainFromPhcModel2({this.successResponse});
+  GetDomainFromPhcModel1({this.successResponse});
 
-  GetDomainFromPhcModel2.fromJson(Map<String, dynamic> json) {
+  GetDomainFromPhcModel1.fromJson(Map<String, dynamic> json) {
     successResponse = json['SuccessResponse'] != null
         ? new SuccessResponse.fromJson(json['SuccessResponse'])
         : null;

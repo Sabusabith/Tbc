@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:qhance_uiii/Screens/type2/actionPlan2.dart';
 import 'package:qhance_uiii/Screens/type2/activity_progression2.dart';
 import 'package:qhance_uiii/Screens/type2/model/getzones_model.dart';
 import 'package:qhance_uiii/Screens/type3/activityProgression.dart';
@@ -13,9 +14,11 @@ import 'model/getDomainFromPHC_model.dart';
 
 class Activities2 extends StatelessWidget {
   Activities2(
-      {required this.taskDetails,required this.phcdetailid});
+      {required this.taskDetails,required this.phcdetailid,required this.domain_name,required this.domainid});
 
 final List<TaskDetail>? taskDetails;
+var domain_name;
+var domainid;
 var phcdetailid;
   @override
   Widget build(BuildContext context) {
@@ -24,6 +27,9 @@ var phcdetailid;
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
+          actions: [InkWell(onTap: (){
+            Get.to(ActivityProgression2(domainid: domainid,));
+          },child: Icon(Icons.add,color: Colors.white,)),SizedBox(width: 10,)],
           leading: IconButton(
             icon: const Icon(
               Icons.arrow_back,
@@ -33,8 +39,8 @@ var phcdetailid;
               Navigator.of(context).pop();
             },
           ),
-          title: const Text(
-            "Reception Activities",
+          title:  Text(
+            "$domain_name Activities",
             style: TextStyle(fontSize: 19, color: Colors.white),
           ),
           backgroundColor: myColor,
@@ -58,17 +64,9 @@ var phcdetailid;
                             onTap: () {
                             
                            
-                           
+                              Get.to(ActivitiesWithActionPlan2());
 
-                              Navigator.push(
-                                  context,
-                                  MaterialPageRoute(
-                                      builder: (context) => ActivityProgression2(
-                                            taskid: taskDetails?[index].id??'0',
-                                            phcid: phcdetailid??'0',
-                                            taskname: taskDetails?[index].taskName??"Demo Task",
-                                            evidence: taskDetails?[index].evidenceOfCompliance??"No Data",
-                                          )));
+                            
                             },
                             child: Container(
                               height: 160.h,
@@ -110,16 +108,16 @@ var phcdetailid;
                                               ),
                                             ),
                                             SizedBox(height: 5),
-                                            Text(
-                                              DateFormat('yyyy-MM-dd').format(
-                                               taskDetails?[index].startDate??DateTime.now(),
-                                              ),
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
+                                                                                  Text(
+  taskDetails?[index].startDate != null
+      ? DateFormat('yyyy-MM-dd').format(DateTime.parse(taskDetails?[index].startDate ?? 'No Data'))
+      :'No Data',
+  style: TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+  ),
+),
                                             SizedBox(height: 25),
                                             Text(
                                               "End Date ",
@@ -129,16 +127,16 @@ var phcdetailid;
                                               ),
                                             ),
                                             SizedBox(height: 5),
-                                            Text(
-                                              DateFormat('yyyy-MM-dd').format(
-                                               taskDetails?[index].endDate??DateTime.now(),
-                                              ),
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
+                                                                                   Text(
+  taskDetails?[index].startDate != null
+      ? DateFormat('yyyy-MM-dd').format(DateTime.parse(taskDetails?[index].endDate ?? 'No Data'))
+      :'No Data',
+  style: TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+  ),
+),
                                           ],
                                         ),
                                       ),

@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:qhance_uiii/Screens/type1/activity1.dart';
 import 'package:qhance_uiii/Screens/type1/controller/getdomains1_controller.dart';
-import 'package:qhance_uiii/Screens/type2/activity2.dart';
 
 import '../../helper/colors.dart';
 
@@ -23,7 +22,8 @@ class Domains1 extends StatelessWidget {
         appBar: AppBar(
           leading: InkWell(
             onTap: () {
-              Navigator.pop(context);
+            Get.back();
+               
             },
             child: Icon(Icons.arrow_back, color: Colors.white),
           ),
@@ -34,21 +34,7 @@ class Domains1 extends StatelessWidget {
           ),
        
           backgroundColor: myColor,
-          actions: [
-            // Row(
-            //   children: [
-            //     GestureDetector(
-            //       onTap: () {
-            //         Get.to(page6());
-            //       },
-            //       child: Image.asset('assets/go.png', height: 25),
-            //     ),
-            //     SizedBox(
-            //       width: ScreenUtil().setWidth(13),
-            //     )
-            //   ],
-            // ),
-          ],
+          
         ),
         backgroundColor: background,
         body: Obx(
@@ -62,7 +48,7 @@ class Domains1 extends StatelessWidget {
             // Show domain list once data is fetched
             else {
               // Check if the domain list is empty
-              if (controller.model?.successResponse.data?.isEmpty ?? true) {
+              if (controller.model?.successResponse?.data?.isEmpty ?? true) {
                 // Display a message indicating that no domains are available
                 return Center(
                   child: Text(
@@ -103,13 +89,14 @@ class Domains1 extends StatelessWidget {
                             mainAxisSpacing: 20.0,
                           ),
                           itemCount:
-                              controller.model?.successResponse.data?.length ?? 0,
+                              controller.model?.successResponse?.data?.length ?? 0,
                           itemBuilder: (context, index) => InkWell(
                             onTap: () {
-                           var phcdetailId = controller.model?.successResponse.data?[index].phcDetailId;   
-                           var data = controller.model?.successResponse.data?[index].domain.taskDetail;
+                           var phcdetailId = controller.model?.successResponse?.data?[index].phcDetailId;   
+                           var data = controller.model?.successResponse?.data?[index].domain?.taskDetail;
+                           var domain_name = controller.model?.successResponse?.data?[index].domain?.domainName;
                               // Handle domain item tap
-                              Get.to(Activities1(taskDetails: data, phcdetailid: phcdetailId));
+                              Get.to(Activities1(taskDetails: data, phcdetailid: phcdetailId,domain_name: domain_name,));
                             },
                             child: Container(
                               width: ScreenUtil().setWidth(200),
@@ -136,8 +123,8 @@ class Domains1 extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15),
                                   child: Text(
-                                    controller.model?.successResponse.data?[index]
-                                            .domain.domainName ??
+                                    controller.model?.successResponse?.data?[index]
+                                            .domain?.domainName ??
                                         "No Domain",
                                     textAlign: TextAlign.center,
                                     maxLines: 4,

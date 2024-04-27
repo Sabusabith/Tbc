@@ -61,7 +61,7 @@ class Domains2 extends StatelessWidget {
             // Show domain list once data is fetched
             else {
               // Check if the domain list is empty
-              if (controller.model?.successResponse.data?.isEmpty ?? true) {
+              if (controller.model?.successResponse?.data?.isEmpty ?? true) {
                 // Display a message indicating that no domains are available
                 return Center(
                   child: Text(
@@ -102,13 +102,15 @@ class Domains2 extends StatelessWidget {
                             mainAxisSpacing: 20.0,
                           ),
                           itemCount:
-                              controller.model?.successResponse.data?.length ?? 0,
+                              controller.model?.successResponse?.data?.length ?? 0,
                           itemBuilder: (context, index) => InkWell(
                             onTap: () {
-                           var phcdetailId = controller.model?.successResponse.data?[index].phcDetailId;   
-                           var data = controller.model?.successResponse.data?[index].domain.taskDetail;
+                           var phcdetailId = controller.model?.successResponse?.data?[index].phcDetailId; 
+                           var domain_id =   controller.model?.successResponse?.data?[index].domainId;
+                           var data = controller.model?.successResponse?.data?[index].domain?.taskDetail;
+                           var domain_name = controller.model?.successResponse?.data?[index].domain?.domainName;
                               // Handle domain item tap
-                              Get.to(Activities2(taskDetails: data, phcdetailid: phcdetailId));
+                              Get.to(Activities2(taskDetails: data, phcdetailid: phcdetailId,domain_name:domain_name,domainid: domain_id,));
                             },
                             child: Container(
                               width: ScreenUtil().setWidth(200),
@@ -135,8 +137,8 @@ class Domains2 extends StatelessWidget {
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15),
                                   child: Text(
-                                    controller.model?.successResponse.data?[index]
-                                            .domain.domainName ??
+                                    controller.model?.successResponse?.data?[index]
+                                            .domain?.domainName ??
                                         "No Domain",
                                     textAlign: TextAlign.center,
                                     maxLines: 4,

@@ -111,16 +111,17 @@ var phcdetailid;
                                               ),
                                             ),
                                             SizedBox(height: 5),
-                                            Text(
-                                              DateFormat('yyyy-MM-dd').format(
-                                               taskDetails?[index].startDate??DateTime.now(),
-                                              ),
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
+                                          Text(
+  taskDetails?[index].startDate != null
+      ? DateFormat('yyyy-MM-dd').format(DateTime.parse(taskDetails?[index].startDate ?? 'No Data'))
+      :'No Data',
+  style: TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+  ),
+),
+
                                             SizedBox(height: 25),
                                             Text(
                                               "End Date ",
@@ -130,16 +131,17 @@ var phcdetailid;
                                               ),
                                             ),
                                             SizedBox(height: 5),
-                                            Text(
-                                              DateFormat('yyyy-MM-dd').format(
-                                               taskDetails?[index].endDate??DateTime.now(),
-                                              ),
-                                              style: TextStyle(
-                                                color: Colors.white,
-                                                fontSize: 14,
-                                                fontWeight: FontWeight.w600,
-                                              ),
-                                            ),
+                                           Text(
+  taskDetails?[index].endDate != null
+      ? DateFormat('yyyy-MM-dd').format(DateTime.parse(taskDetails?[index].endDate ?? 'No Data'))
+      : 'No Data',
+  style: TextStyle(
+    color: Colors.white,
+    fontSize: 14,
+    fontWeight: FontWeight.w600,
+  ),
+),
+
                                           ],
                                         ),
                                       ),

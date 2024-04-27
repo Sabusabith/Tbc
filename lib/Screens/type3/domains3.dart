@@ -50,9 +50,26 @@ class Domains3 extends StatelessWidget {
             body: SizedBox(
               width: size.width,
               height: size.height,
-              child: Obx(()=>
-                ccontroller.isloading.value ?Center(child: CircularProgressIndicator(color: myColor,)):
-                  Column(
+              child: Obx((){
+                 if (ccontroller.isloading.value) {
+              return Center(
+                child: CircularProgressIndicator(color: myColor,),
+              );
+            }
+            // Show domain list once data is fetched
+            else {
+              // Check if the domain list is empty
+              if (ccontroller.model?.successResponse?.data?.isEmpty ?? true) {
+                // Display a message indicating that no domains are available
+                return Center(
+                  child: Text(
+                    "No available Domains",
+                    style: TextStyle(fontSize: 18,color: Colors.grey.shade800),
+                  ),
+                );
+              } else {
+                
+               return   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(
@@ -82,12 +99,12 @@ class Domains3 extends StatelessWidget {
                                   20.0, // Spacing between rows Spacing between rows
                             ),
                             itemCount:
-                                ccontroller.model?.successResponse.data?.length ??
+                                ccontroller.model?.successResponse?.data?.length ??
                                     0,
                             itemBuilder: (context, index) => InkWell(
                               onTap: () async {
-                             var phcdetailId = ccontroller.model?.successResponse.data?[index].phcDetailId;   
-                           var data = ccontroller.model?.successResponse.data?[index].domain.taskDetail;
+                             var phcdetailId = ccontroller.model?.successResponse?.data?[index].phcDetailId;   
+                           var data = ccontroller.model?.successResponse?.data?[index].domain?.taskDetail;
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
@@ -119,8 +136,7 @@ class Domains3 extends StatelessWidget {
                                     padding:
                                         const EdgeInsets.symmetric(horizontal: 25),
                                     child: Text(
-                                      ccontroller.model?.successResponse
-                                              .data?[index].domain.domainName
+                                      ccontroller.model?.successResponse?.data?[index].domain?.domainName
                                               .toString() ??
                                           "No Domains Found",
                                       textAlign: TextAlign.center,
@@ -140,9 +156,9 @@ class Domains3 extends StatelessWidget {
                           ),
                         ),
                       ),
-                    ],
-                  ),
-              ),
+                          ],
+              );}}
+  }),
               ),
             ));
   }
