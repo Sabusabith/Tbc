@@ -168,6 +168,7 @@ class TaskDetail {
   int? score;
   String? createdAt;
   String? updatedAt;
+  List<TaskProgression>? taskProgression;
 
   TaskDetail(
       {this.id,
@@ -185,7 +186,8 @@ class TaskDetail {
       this.remarks,
       this.score,
       this.createdAt,
-      this.updatedAt});
+      this.updatedAt,
+      this.taskProgression});
 
   TaskDetail.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -204,6 +206,12 @@ class TaskDetail {
     score = json['score'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
+    if (json['task_progression'] != null) {
+      taskProgression = <TaskProgression>[];
+      json['task_progression'].forEach((v) {
+        taskProgression!.add(new TaskProgression.fromJson(v));
+      });
+    }
   }
 
   Map<String, dynamic> toJson() {
@@ -222,6 +230,67 @@ class TaskDetail {
     data['status_progression'] = this.statusProgression;
     data['remarks'] = this.remarks;
     data['score'] = this.score;
+    data['created_at'] = this.createdAt;
+    data['updated_at'] = this.updatedAt;
+    if (this.taskProgression != null) {
+      data['task_progression'] =
+          this.taskProgression!.map((v) => v.toJson()).toList();
+    }
+    return data;
+  }
+}
+
+class TaskProgression {
+  String? id;
+  String? taskDetailId;
+  String? phcDetailId;
+  String? createdById;
+  String? name;
+  int? perVisit;
+  String? staffAvailability;
+  String? awarenessTrained;
+  String? remarks;
+  String? createdAt;
+  String? updatedAt;
+
+  TaskProgression(
+      {this.id,
+      this.taskDetailId,
+      this.phcDetailId,
+      this.createdById,
+      this.name,
+      this.perVisit,
+      this.staffAvailability,
+      this.awarenessTrained,
+      this.remarks,
+      this.createdAt,
+      this.updatedAt});
+
+  TaskProgression.fromJson(Map<String, dynamic> json) {
+    id = json['id'];
+    taskDetailId = json['task_detail_id'];
+    phcDetailId = json['phc_detail_id'];
+    createdById = json['created_by_id'];
+    name = json['name'];
+    perVisit = json['per_visit'];
+    staffAvailability = json['staff_availability'];
+    awarenessTrained = json['awareness_trained'];
+    remarks = json['remarks'];
+    createdAt = json['created_at'];
+    updatedAt = json['updated_at'];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> data = new Map<String, dynamic>();
+    data['id'] = this.id;
+    data['task_detail_id'] = this.taskDetailId;
+    data['phc_detail_id'] = this.phcDetailId;
+    data['created_by_id'] = this.createdById;
+    data['name'] = this.name;
+    data['per_visit'] = this.perVisit;
+    data['staff_availability'] = this.staffAvailability;
+    data['awareness_trained'] = this.awarenessTrained;
+    data['remarks'] = this.remarks;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;

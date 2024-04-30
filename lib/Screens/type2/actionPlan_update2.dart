@@ -1,26 +1,49 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:get/route_manager.dart';
 import 'package:intl/intl.dart';
+import 'package:qhance_uiii/Screens/type2/controller/add_actionplan2_controller.dart';
+import 'package:qhance_uiii/Screens/type3/model/get_users_model.dart';
 
 import '../../helper/colors.dart';
 
 class ActionPlanUpdate2 extends StatelessWidget {
   ActionPlanUpdate2(
-      {super.key,
-      required this.assigned,
-      required this.task_name,
-      required this.details,
-      required this.coassigned,
-      required this.days,
-      required this.start_date,
-      required this.end_date});
-  var task_name;
-  var assigned;
-  var coassigned;
-  var details;
-  var days;
-  DateTime start_date;
-  DateTime end_date;
+      {required this.phcdetailid,
+      required this.taskprogressionId,
+      required this.taskdetailid});
+  final actionplancontroller = TextEditingController();
+  final evidenceController = TextEditingController();
+  var taskprogressionId;
+  var phcdetailid;
+  var taskdetailid;
+
+  AddActionPlanController controller = Get.put(AddActionPlanController());
+  postData(BuildContext context) {
+    print("phc detail id = $phcdetailid");
+    print("Task progression = $taskprogressionId");
+    print("task detail id  = $taskdetailid");
+
+    if (actionplancontroller.text.isEmpty || evidenceController.text.isEmpty) {
+      // Show an error message indicating that all fields are required
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('Please fill in all fields'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      return; // Exit the method if any field is empty
+    }
+    Map data = {
+      'action_plan': actionplancontroller.text,
+      'task_progression_id': taskprogressionId,
+      'task_detail_id': taskdetailid,
+      'phc_detail_id': phcdetailid,
+      'evidence_of_compliance': evidenceController.text
+    };
+    controller.addActionPlan(data, context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,240 +77,81 @@ class ActionPlanUpdate2 extends StatelessWidget {
               GestureDetector(
                 onTap: () {},
                 child: Container(
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
-                      border: Border.all(color: myColor, width: 1.5)),
-                  height: 160,
-                  width: size.width,
-                  margin: EdgeInsets.symmetric(horizontal: 25),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      SizedBox(
-                        height: 15,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 25),
-                        child: SizedBox(
-                          width: size.width,
-                          height: 80,
-                          child: Text(
-                            task_name ?? "No Data",
-                            style: TextStyle(
-                              height: 1.3,
-                              fontSize: 14,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            maxLines: 4,
-                            textAlign: TextAlign.start,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ),
-                      Column(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 25),
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Text(
-                                  "Assigned to : ",
-                                  style: TextStyle(
-                                      color: Colors.grey.shade700,
-                                      fontSize: 13),
-                                ),
-                              ],
-                            ),
-                          ),
-                          SizedBox(
-                            height: 5,
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 25),
-                            child: Text(
-                              assigned ?? "Person 1",
-                              style: TextStyle(
-                                fontSize: 14,
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500,
-                              ),
-                              maxLines: 1,
-                              textAlign: TextAlign.start,
-                              softWrap: true,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                        ],
-                      )
-                    ],
-                  ),
-                ),
-              ),
-              SizedBox(
-                height: 40,
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Container(
-                    height: 350,
                     width: size.width,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(15),
-                        border: Border.all(color: myColor, width: 1.5)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        SizedBox(
-                          height: 25,
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Text(
-                            task_name ?? "No Data",
-                            style: TextStyle(
-                              height: 1.3,
-                              fontSize: 14,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500,
-                            ),
-                            maxLines: 4,
-                            textAlign: TextAlign.start,
-                            softWrap: true,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        SizedBox(height: 20,),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Row(
-                            children: [
-                              Text("Start Date :  ",style: TextStyle(color: Colors.grey.shade800),),
-                              Text(
-                                DateFormat('yyyy-MM-dd').format(
-                                  start_date,
-                                ),
-                                style: TextStyle(
-                                  color: Colors.grey.shade800,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
+                    margin: EdgeInsets.symmetric(horizontal: 25),
+                    child: TextField(
+                      controller: evidenceController,
+                      style: TextStyle(color: Colors.grey.shade800),
+                      maxLines: 5,
+                      decoration: InputDecoration(
+                          hintText: " Evidence of Compliance",
+                          hintStyle: TextStyle(color: Colors.grey.shade600),
+                          border: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  BorderSide(color: myColor, width: 1.5)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(
+                                10,
                               ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 5,),
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: Row(
-                            children: [
-                              Text("End Date   :  ",style: TextStyle(color: Colors.grey.shade800),),
-                              Text(
-                                DateFormat('yyyy-MM-dd').format(
-                                  end_date,
-                                ),
-                                style: TextStyle(
-                                  color: Colors.grey.shade800,
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        SizedBox(height: 15,),
-                         Padding(
-                           padding: const EdgeInsets.only(left: 20),
-                           child: Row(
-                             mainAxisAlignment: MainAxisAlignment.start,
-                             children: [
-                               Text(
-                                 "Assigned to :  ",
-                                 style: TextStyle(
-                                     color: Colors.grey.shade700,
-                                     fontSize: 13),
-                               ),
-                               
-                                  Text(
-                           assigned ?? "Person 1",
-                           style: TextStyle(
-                             fontSize: 14,
-                             color: Colors.black,
-                             fontWeight: FontWeight.w500,
-                           ),
-                           maxLines: 1,
-                           textAlign: TextAlign.start,
-                           softWrap: true,
-                           overflow: TextOverflow.ellipsis,
-                         )
-                             ],
-                           ),
-                         ),
-                         SizedBox(height: 10,),
-                            Padding(
-                           padding: const EdgeInsets.only(left: 20),
-                           child: Row(
-                             mainAxisAlignment: MainAxisAlignment.start,
-                             children: [
-                               Text(
-                                 "Co-assigned to :  ",
-                                 style: TextStyle(
-                                     color: Colors.grey.shade700,
-                                     fontSize: 13),
-                               ),
-                               
-                                  Text(
-                           coassigned ?? "Person 1",
-                           style: TextStyle(
-                             fontSize: 14,
-                             color: Colors.black,
-                             fontWeight: FontWeight.w500,
-                           ),
-                           maxLines: 1,
-                           textAlign: TextAlign.start,
-                           softWrap: true,
-                           overflow: TextOverflow.ellipsis,
-                         )
-                             ],
-                           ),
-                         ),
-                       
-                      ],
+                              borderSide:
+                                  BorderSide(color: myColor, width: 1.5))),
                     )),
               ),
               SizedBox(
-                height: 50,
+                height: 60,
               ),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 25),
                 child: Container(
-                  height: 50,
-                  width: size.width,
-                  decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(30),
-                      border: Border.all(color: myColor, width: 1.5)),
-                  child: Row(
-                    children: [
-                      SizedBox(
-                        width: 20,
+                    width: size.width,
+                    child: TextField(
+                      controller: actionplancontroller,
+                      style: TextStyle(color: Colors.grey.shade800),
+                      maxLines: 10,
+                      decoration: InputDecoration(
+                          hintText: " Action Plan",
+                          hintStyle: TextStyle(color: Colors.grey.shade600),
+                          border: InputBorder.none,
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(10),
+                              borderSide:
+                                  BorderSide(color: myColor, width: 1.5)),
+                          enabledBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(
+                                10,
+                              ),
+                              borderSide:
+                                  BorderSide(color: myColor, width: 1.5))),
+                    )),
+              ),
+              SizedBox(
+                height: 60,
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 25),
+                child: InkWell(
+                  onTap: () {
+                    postData(context);
+                  },
+                  child: Container(
+                    height: 50,
+                    width: size.width,
+                    decoration: BoxDecoration(
+                        color: myColor,
+                        borderRadius: BorderRadius.circular(30),
+                        border: Border.all(color: myColor, width: 1.5)),
+                    child: Center(
+                      child: Text(
+                        "Update",
+                        style: TextStyle(
+                            color: Colors.white,
+                            letterSpacing: 1,
+                            fontSize: 15,
+                            fontWeight: FontWeight.bold),
                       ),
-                      Text(
-                        "Dependent Days",
-                        style: TextStyle(color: Colors.grey.shade800),
-                      ),
-                      Spacer(),
-                      Text(
-                        days.toString(),
-                        style: TextStyle(color: Colors.grey.shade800),
-                      ),
-                      SizedBox(
-                        width: 40,
-                      ),
-                    ],
+                    ),
                   ),
                 ),
               )

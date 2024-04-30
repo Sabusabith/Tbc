@@ -1,9 +1,9 @@
-class AddTaskModel {
+class AddActionplanModel {
   SuccessResponse? successResponse;
 
-  AddTaskModel({this.successResponse});
+  AddActionplanModel({this.successResponse});
 
-  AddTaskModel.fromJson(Map<String, dynamic> json) {
+  AddActionplanModel.fromJson(Map<String, dynamic> json) {
     successResponse = json['SuccessResponse'] != null
         ? new SuccessResponse.fromJson(json['SuccessResponse'])
         : null;
@@ -21,22 +21,16 @@ class AddTaskModel {
 class SuccessResponse {
   bool? statusCode;
   int? resposeCode;
-  String? taskDetailId;
-  String? taskProgressionId;
+  String? actionPlanId;
   String? message;
 
   SuccessResponse(
-      {this.statusCode,
-      this.resposeCode,
-      this.taskDetailId,
-      this.taskProgressionId,
-      this.message});
+      {this.statusCode, this.resposeCode, this.actionPlanId, this.message});
 
   SuccessResponse.fromJson(Map<String, dynamic> json) {
     statusCode = json['statusCode'];
     resposeCode = json['resposeCode'];
-    taskDetailId = json['taskDetailId'];
-    taskProgressionId = json['taskProgressionId'];
+    actionPlanId = json['actionPlanId'];
     message = json['message'];
   }
 
@@ -44,8 +38,7 @@ class SuccessResponse {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['statusCode'] = this.statusCode;
     data['resposeCode'] = this.resposeCode;
-    data['taskDetailId'] = this.taskDetailId;
-    data['taskProgressionId'] = this.taskProgressionId;
+    data['actionPlanId'] = this.actionPlanId;
     data['message'] = this.message;
     return data;
   }

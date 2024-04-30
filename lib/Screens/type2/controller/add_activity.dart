@@ -7,6 +7,8 @@ import 'package:qhance_uiii/utils/api_provider.dart';
 import 'package:qhance_uiii/utils/shared_data.dart';
 
 class ItemController2 extends GetxController {
+
+  var taskprograssion = '';
   addItem(
     Map data,
     context,
@@ -35,10 +37,10 @@ class ItemController2 extends GetxController {
           response.data["SuccessResponse"]['statusCode'] == true) {
         print('status message : ${response.data}');
         model = AddTaskModel.fromJson(response.data);
-
+var taskprograssion = model.successResponse?.taskProgressionId??"";
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text(model.successResponse.message.toString()),
+            content: Text(model.successResponse?.message.toString()??"Task details updated successfully"),
             backgroundColor: Colors.green,
           ),
         );
