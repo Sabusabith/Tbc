@@ -4,6 +4,7 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:qhance_uiii/Screens/login.dart';
+import 'package:qhance_uiii/Screens/splash.dart';
 import 'package:qhance_uiii/Screens/type2/controller/get_specialization_controller.dart';
 import 'package:qhance_uiii/Screens/type2/controller/getzones_controller.dart';
 import 'package:qhance_uiii/Screens/type2/phc_zones.dart';
@@ -54,7 +55,7 @@ class Zones extends StatelessWidget {
                       await clearSavedObject('token');
           await clearSavedObject('type');
         await clearSavedObject('phc');
-                      Get.to(login());
+                  Get.offAll(() => login());
                           },
                           child: Text("Logout",style: TextStyle(color: myColor)),
                         ),

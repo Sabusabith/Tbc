@@ -66,6 +66,7 @@ GetActionPlanController2 actionPlanController = Get.put(GetActionPlanController2
 }
 
 void passData() {
+  print('domain id ::: ${widget.domainid}');
   // Check if any of the fields are empty
   if (taskcontroller.text.isEmpty ||
       evidenccecontroller.text.isEmpty 
@@ -79,6 +80,7 @@ void passData() {
     );
     return; // Exit the method if any field is empty
   }
+  
 
   // If all fields are filled, proceed with adding the data
   Map<String, dynamic> data = {

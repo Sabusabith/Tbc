@@ -180,7 +180,7 @@ class login extends StatelessWidget {
   }
 
   //pass login data
-_login(BuildContext context ) {
+_login(BuildContext context ){
   String email = controller.emailController.value.text;
   String password = controller.passController.value.text;
   String errorMessage = '';
@@ -193,7 +193,7 @@ _login(BuildContext context ) {
     errorMessage = 'Please enter your password';
   } else {
     // No errors, proceed with login
-    controller.login(context);
+  controller.login(context);
     return;
   }
 customSnackBar(errorMessage,errorMessage, context);

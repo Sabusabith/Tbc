@@ -32,9 +32,9 @@ ItemController controller = Get.put(ItemController());
 GetActionPlanController actionPlanController = Get.put(GetActionPlanController());
 
 
-  int _radiobutton = 1;
-  int _unselect = 1;
-  int selectedindex = 1;
+  int _radiobutton = 0;
+  int _unselect = 0;
+  int selectedindex = 0;
 
 passData() {
    print("phc details id : ${widget.phcid}");

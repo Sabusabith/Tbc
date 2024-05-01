@@ -57,7 +57,7 @@ class Zones1 extends StatelessWidget {
                       await clearSavedObject('token');
           await clearSavedObject('type');
         await clearSavedObject('phc');
-                      Get.to(login());
+                          Get.offAll(() => login());
                           },
                           child: Text("Logout",style: TextStyle(color: myColor)),
                         ),
