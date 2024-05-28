@@ -33,7 +33,6 @@ class GetDomainFromPHCcontroller2 extends GetxController {
     if (response.statusCode == 200 &&
         response.data["SuccessResponse"]['statusCode'] == true) {
     
-
       isloading(false);
       model = GetDomainFromPhcModel2.fromJson(response.data);
                 print("Domain details : ${model?.successResponse?.data?[0].domain?.domainName}");

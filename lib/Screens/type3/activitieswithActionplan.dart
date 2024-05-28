@@ -9,7 +9,7 @@ import '../../helper/colors.dart';
 
 class ActivitiesWithActionPlan extends StatelessWidget {
   ActivitiesWithActionPlan({super.key});
-GetActionPlanController controller = Get.put(GetActionPlanController());
+  GetActionPlanController controller = Get.put(GetActionPlanController());
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -31,123 +31,211 @@ GetActionPlanController controller = Get.put(GetActionPlanController());
           backgroundColor: myColor,
         ),
         body: SizedBox(
-          width: size.width,
-          height: size.height,
-          child:Obx(()=>
-             controller.isloading.value?Center(child: CircularProgressIndicator(color: myColor,)): controller.model?.successResponse.data != null? ListView.builder(
-              itemCount: controller.model?.successResponse.data?.length??0,
-              itemBuilder: ((context, index) => Column(
-                    children: [
-                      SizedBox(
-                        height: 20,
-                      ),
-                      GestureDetector(onTap: (){
-                        
-                      },
-                        child: Container(
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(15),
-                              border: Border.all(color: myColor, width: 1.5)),
-                          height: 160,
-                          width: size.width,
-                          margin: EdgeInsets.symmetric(horizontal: 25),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SizedBox(
-                                height: 15,
-                              ),
-                              Padding(
-                                padding:  EdgeInsets.symmetric(horizontal: 25),
-                                child: GestureDetector(onTap: (){
-                              var task_name = controller.model?.successResponse.data?[index].actionPlan;
-                              var assigned = controller.model?.successResponse.data?[index].assignedTo?.name??"Person 1";
-                              var days = controller.model?.successResponse.data?[index].dependentDays;
-                              var details = controller.model?.successResponse.data?[index].statusProgression;
-                               var co_assign = controller.model?.successResponse.data?[index].coAssignedTo?.name??"Person 2";
-                                var startdateObject = controller
-                                .model
-                                ?.successResponse
-                                .data?[index].startDate;
-                                    var enddateObject = controller
-                                .model
-                                ?.successResponse
-                                .data?[index].endDate;
-                                
-                                 DateTime? startdate = startdateObject != null
-                                ? DateTime.parse(startdateObject.toString())
-                                : null;
-                                  DateTime? enddate = enddateObject != null
-                                ? DateTime.parse(enddateObject.toString())
-                                : null;
-                                  Get.to(ActionPlanUpdate(coassigned: co_assign,task_name: task_name,assigned:assigned,days: days,details: details,start_date: startdate ?? DateTime.now(),end_date: enddate??DateTime.now(),),);
-                                },
-                                  child: SizedBox(
-                                    width: size.width,
-                                    height: 80,
-                                    child: Text(
-                                      controller.model?.successResponse.data?[index].actionPlan??"No Action Plan",
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w500,
-                                      ),
-                                      maxLines: 4,
-                                      textAlign: TextAlign.start,
-                                      softWrap: true,
-                                      overflow: TextOverflow.ellipsis,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                crossAxisAlignment: CrossAxisAlignment.start,
+            width: size.width,
+            height: size.height,
+            child: Obx(
+              () {  if (controller.isloading.value) {
+              return Center(
+                child: CircularProgressIndicator(color: myColor,),
+              );
+            }
+            // Show domain list once data is fetched
+            else {
+              // Check if the domain list is empty
+              if (controller.model?.successResponse.data?.isEmpty ??true) {
+                // Display a message indicating that no domains are available
+                return Center(
+                  child: Text(
+                    "No Action plans",
+                    style: TextStyle(fontSize: 18,color: Colors.grey.shade800),
+                  ),
+                );
+              } else {
+                return ListView.builder(
+                          itemCount:
+                              controller.model?.successResponse.data?.length ??
+                                  0,
+                          itemBuilder: ((context, index) => Column(
                                 children: [
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(horizontal: 25),
-                                    child: Row(
-                                      mainAxisAlignment: MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          "Assigned to : ",
-                                          style: TextStyle(
-                                              color: Colors.grey.shade700,
-                                              fontSize: 13),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
                                   SizedBox(
-                                    height: 5,
+                                    height: 20,
                                   ),
-                                  Padding(
-                                    padding:
-                                        const EdgeInsets.symmetric(horizontal: 25),
-                                    child: Text(
-                                       controller.model?.successResponse.data?[index].assignedTo?.name??'No Data',
-                                      style: TextStyle(
-                                        fontSize: 14,
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.w500,
+                                  GestureDetector(
+                                    onTap: () {},
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          borderRadius:
+                                              BorderRadius.circular(15),
+                                          border: Border.all(
+                                              color: myColor, width: 1.5)),
+                                      height: 160,
+                                      width: size.width,
+                                      margin:
+                                          EdgeInsets.symmetric(horizontal: 25),
+                                      child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          SizedBox(
+                                            height: 15,
+                                          ),
+                                          Padding(
+                                            padding: EdgeInsets.symmetric(
+                                                horizontal: 25),
+                                            child: GestureDetector(
+                                              onTap: () {
+                                                var task_name = controller
+                                                    .model
+                                                    ?.successResponse
+                                                    .data?[index]
+                                                    .actionPlan;
+                                                var assigned = controller
+                                                        .model
+                                                        ?.successResponse
+                                                        .data?[index]
+                                                        .assignedTo
+                                                        ?.name ??
+                                                    "Person 1";
+                                                var days = controller
+                                                    .model
+                                                    ?.successResponse
+                                                    .data?[index]
+                                                    .dependentDays;
+                                                var details = controller
+                                                    .model
+                                                    ?.successResponse
+                                                    .data?[index]
+                                                    .statusProgression;
+                                                var co_assign = controller
+                                                        .model
+                                                        ?.successResponse
+                                                        .data?[index]
+                                                        .coAssignedTo
+                                                        ?.name ??
+                                                    "Person 2";
+                                                var startdateObject = controller
+                                                    .model
+                                                    ?.successResponse
+                                                    .data?[index]
+                                                    .startDate;
+                                                var enddateObject = controller
+                                                    .model
+                                                    ?.successResponse
+                                                    .data?[index]
+                                                    .endDate;
+
+                                                DateTime? startdate =
+                                                    startdateObject != null
+                                                        ? DateTime.parse(
+                                                            startdateObject
+                                                                .toString())
+                                                        : null;
+                                                DateTime? enddate =
+                                                    enddateObject != null
+                                                        ? DateTime.parse(
+                                                            enddateObject
+                                                                .toString())
+                                                        : null;
+                                                Get.to(
+                                                  ActionPlanUpdate(
+                                                    coassigned: co_assign,
+                                                    task_name: task_name,
+                                                    assigned: assigned,
+                                                    days: days,
+                                                    details: details,
+                                                    start_date: startdate ??
+                                                        DateTime.now(),
+                                                    end_date: enddate ??
+                                                        DateTime.now(),
+                                                  ),
+                                                );
+                                              },
+                                              child: SizedBox(
+                                                width: size.width,
+                                                height: 80,
+                                                child: Text(
+                                                  controller
+                                                          .model
+                                                          ?.successResponse
+                                                          .data?[index]
+                                                          .actionPlan ??
+                                                      "No Action Plan",
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  maxLines: 4,
+                                                  textAlign: TextAlign.start,
+                                                  softWrap: true,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.start,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 25),
+                                                child: Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      "Assigned to : ",
+                                                      style: TextStyle(
+                                                          color: Colors
+                                                              .grey.shade700,
+                                                          fontSize: 13),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                              SizedBox(
+                                                height: 5,
+                                              ),
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 25),
+                                                child: Text(
+                                                  controller
+                                                          .model
+                                                          ?.successResponse
+                                                          .data?[index]
+                                                          .assignedTo
+                                                          ?.name ??
+                                                      'No Data',
+                                                  style: TextStyle(
+                                                    fontSize: 14,
+                                                    color: Colors.black,
+                                                    fontWeight: FontWeight.w500,
+                                                  ),
+                                                  maxLines: 1,
+                                                  textAlign: TextAlign.start,
+                                                  softWrap: true,
+                                                  overflow:
+                                                      TextOverflow.ellipsis,
+                                                ),
+                                              ),
+                                            ],
+                                          )
+                                        ],
                                       ),
-                                      maxLines: 1,
-                                      textAlign: TextAlign.start,
-                                      softWrap: true,
-                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                  ),
+                                  )
                                 ],
-                              )
-                            ],
-                          ),
-                        ),
-                      )
-                    ],
-                  )),
-            ):Text("No Action Plan",style: TextStyle(color: Colors.grey.shade800),),
-          )
-        ));
+                              )),
+                        );
+              }}
+                    
+  })));
   }
 }

@@ -13,11 +13,12 @@ import 'model/getDomainFromPHC_model.dart';
 
 class Activities extends StatelessWidget {
   Activities(
-      {required this.taskDetails,required this.phcdetailid});
+      {required this.taskDetails,required this.phcdetailid,required this.domain_name});
   GetDomainFromPHCcontroller ccontroller =
       Get.put(GetDomainFromPHCcontroller());
 final List<TaskDetail>? taskDetails;
 var phcdetailid;
+var domain_name;
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -34,8 +35,8 @@ var phcdetailid;
               Navigator.of(context).pop();
             },
           ),
-          title: const Text(
-            "Reception Activities",
+          title:  Text(
+            "$domain_name Activities",
             style: TextStyle(fontSize: 19, color: Colors.white),
           ),
           backgroundColor: myColor,

@@ -5,6 +5,7 @@ import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:qhance_uiii/Screens/type1/zones1.dart';
+import 'package:qhance_uiii/Screens/type2/controller/getAllUsersController.dart';
 
 import 'package:qhance_uiii/utils/shared_data.dart';
 import 'package:qhance_uiii/utils/toast.dart';
@@ -55,6 +56,7 @@ class LoginController extends GetxController {
             saveObject('type', loginModel.message.userType);
             customSnackBar("Login success", "Login success", context,
                 isError: false);
+              
             Get.to(Zones());
           } else if (userType == 'Type 3') {
             final LoginModel loginModel = LoginModel.fromJson(responseData);
@@ -67,6 +69,7 @@ class LoginController extends GetxController {
                 loginModel.message.userDetail?.first.phcDetailId);
             saveObject("id", authId);
             phcTbcCode = loginModel.message.userDetail?.first.phcTbcCodeId;
+            saveObject('phctbccodeid', phcTbcCode);
             apiToken = loginModel.apiToken;
             customSnackBar("Login success", "Login success", context,
                 isError: false);

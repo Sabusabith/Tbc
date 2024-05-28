@@ -166,6 +166,7 @@ class TaskDetail {
   String? statusProgression;
   String? remarks;
   int? score;
+  int? isActive;
   String? createdAt;
   String? updatedAt;
   List<TaskProgression>? taskProgression;
@@ -185,6 +186,7 @@ class TaskDetail {
       this.statusProgression,
       this.remarks,
       this.score,
+      this.isActive,
       this.createdAt,
       this.updatedAt,
       this.taskProgression});
@@ -204,6 +206,7 @@ class TaskDetail {
     statusProgression = json['status_progression'];
     remarks = json['remarks'];
     score = json['score'];
+    isActive = json['is_active'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
     if (json['task_progression'] != null) {
@@ -230,6 +233,7 @@ class TaskDetail {
     data['status_progression'] = this.statusProgression;
     data['remarks'] = this.remarks;
     data['score'] = this.score;
+    data['is_active'] = this.isActive;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     if (this.taskProgression != null) {
@@ -250,6 +254,7 @@ class TaskProgression {
   String? staffAvailability;
   String? awarenessTrained;
   String? remarks;
+  int? isActive;
   String? createdAt;
   String? updatedAt;
 
@@ -263,6 +268,7 @@ class TaskProgression {
       this.staffAvailability,
       this.awarenessTrained,
       this.remarks,
+      this.isActive,
       this.createdAt,
       this.updatedAt});
 
@@ -276,6 +282,7 @@ class TaskProgression {
     staffAvailability = json['staff_availability'];
     awarenessTrained = json['awareness_trained'];
     remarks = json['remarks'];
+    isActive = json['is_active'];
     createdAt = json['created_at'];
     updatedAt = json['updated_at'];
   }
@@ -291,6 +298,7 @@ class TaskProgression {
     data['staff_availability'] = this.staffAvailability;
     data['awareness_trained'] = this.awarenessTrained;
     data['remarks'] = this.remarks;
+    data['is_active'] = this.isActive;
     data['created_at'] = this.createdAt;
     data['updated_at'] = this.updatedAt;
     return data;

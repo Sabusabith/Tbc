@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
@@ -5,9 +6,11 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:qhance_uiii/Screens/login.dart';
 import 'package:qhance_uiii/Screens/splash.dart';
+import 'package:qhance_uiii/Screens/type2/controller/getAllUsersController.dart';
 import 'package:qhance_uiii/Screens/type2/controller/get_specialization_controller.dart';
 import 'package:qhance_uiii/Screens/type2/controller/getzones_controller.dart';
 import 'package:qhance_uiii/Screens/type2/phc_zones.dart';
+import 'package:qhance_uiii/Screens/type2/users_list.dart';
 
 import '../../helper/colors.dart';
 import '../../utils/shared_data.dart';
@@ -20,6 +23,7 @@ class Zones extends StatelessWidget {
 
   GetZonesController controller = GetZonesController();
   GetSpecializationController specializationController = Get.put(GetSpecializationController());
+  GetAllUsersController usersController = Get.put(GetAllUsersController());
   @override
   Widget build(BuildContext context) {
 
@@ -36,6 +40,13 @@ class Zones extends StatelessWidget {
           child: Scaffold(
                     appBar: AppBar(
           actions: [
+
+
+InkWell(onTap: (){
+  Get.to(Userslist());
+},child: Icon(CupertinoIcons.person_2_fill,color: Colors.white,size: 30,)),
+SizedBox(width: 25,),
+
              InkWell(onTap: () {
            showDialog(
                   context: context,

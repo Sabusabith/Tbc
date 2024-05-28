@@ -33,8 +33,8 @@ var zoneName;
                 },
               ),
               actions: [
-               GestureDetector(onTap: (){
-                 Navigator.push(
+               GestureDetector(onTap: ()async{
+                await Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) =>  AddUser(phcDetailList: phcDetailList,)));

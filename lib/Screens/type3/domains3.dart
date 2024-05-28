@@ -105,12 +105,14 @@ class Domains3 extends StatelessWidget {
                               onTap: () async {
                              var phcdetailId = ccontroller.model?.successResponse?.data?[index].phcDetailId;   
                            var data = ccontroller.model?.successResponse?.data?[index].domain?.taskDetail;
+                           var domainName = ccontroller.model?.successResponse?.data?[index].domain?.domainName;
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) => Activities(
                                         taskDetails: data,
                                         phcdetailid: phcdetailId,
+                                        domain_name: domainName,
                                             )));
                               },
                               child: Container(
